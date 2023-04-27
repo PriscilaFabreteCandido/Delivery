@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Pedido {
     private int idPedido;
-    private Usuario cliente;
+//    private Usuario cliente;
     private Status status;
     private Date data;
     private String endereco;
