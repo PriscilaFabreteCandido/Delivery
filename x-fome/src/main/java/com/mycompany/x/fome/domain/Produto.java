@@ -5,15 +5,29 @@
  */
 package com.mycompany.x.fome.domain;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author prisc
  */
 public class Produto {
-    private Integer idProduto;
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    private int idProduto;
+    
     private Categoria categoria;
-    private String nome;
+    
+    @Column (name="nomeProduto", length = 250, nullable = false)
+    private String nomeProduto;
+    
+    @Column (name="ingredientes", length = 250, nullable = false)
     private String ingredientes;
+    
+    
     private Double preco;
 
   

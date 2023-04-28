@@ -5,6 +5,8 @@
  */
 package com.mycompany.x.fome.view;
 
+import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+
 /**
  *
  * @author 2021122760232
@@ -14,7 +16,7 @@ public class DlgVisualizarPedidos extends javax.swing.JDialog {
     /**
      * Creates new form DlgVisualizarPedidos
      */
-    public DlgVisualizarPedidos(java.awt.Frame parent, boolean modal) {
+    public DlgVisualizarPedidos(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG) {
         super(parent, modal);
         initComponents();
     }

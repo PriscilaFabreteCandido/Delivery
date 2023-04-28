@@ -5,13 +5,21 @@
  */
 package com.mycompany.x.fome.domain;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author 2021122760232
  */
 
 public class Categoria {
-   
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idCategoria;
+    
+    @Column (name="nome", length = 250, nullable = false)
     private String nome;
 }

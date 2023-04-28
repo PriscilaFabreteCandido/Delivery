@@ -112,7 +112,7 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_confuguracoesActionPerformed
 
     private void pedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pedidosMouseClicked
-      this.gerInterfaceGrafica.openJanelaCarrinho();
+      this.gerInterfaceGrafica.openJanelaVisualizarPedidos();
     }//GEN-LAST:event_pedidosMouseClicked
 
     private void confuguracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confuguracoesMouseClicked
@@ -120,7 +120,7 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_confuguracoesMouseClicked
 
     private void pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidosActionPerformed
-        this.gerInterfaceGrafica.openJanelaCarrinho();
+        this.gerInterfaceGrafica.openJanelaVisualizarPedidos();
     }//GEN-LAST:event_pedidosActionPerformed
 
     /**

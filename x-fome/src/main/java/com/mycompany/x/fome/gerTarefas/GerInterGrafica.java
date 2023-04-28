@@ -5,10 +5,10 @@
  */
 package com.mycompany.x.fome.gerTarefas;
 
-import com.mycompany.x.fome.view.DlgCarrinho;
 import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
 import com.mycompany.x.fome.view.DlgUsuario;
+import com.mycompany.x.fome.view.DlgVisualizarPedidos;
 import com.mycompany.x.fome.view.FormPrincipalCliente;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
@@ -29,7 +29,7 @@ public class GerInterGrafica {
     private DlgLogin dlgLogin = null;
     private DlgUsuario dlgUsuario = null;
     private DlgLoja dlgLoja = null;
-    private DlgCarrinho dlgCarrinho = null;
+    private DlgVisualizarPedidos dlgVisualizarPedidos = null;
 
     public GerInterGrafica() {
     }
@@ -65,13 +65,11 @@ public class GerInterGrafica {
         dlgLoja = (DlgLoja) abrirJanela(principalCliente, dlgLoja, DlgLoja.class);
     }
     
-    public void openJanelaCarrinho(){
-        dlgCarrinho = (DlgCarrinho) abrirJanela(principalCliente, dlgCarrinho, DlgCarrinho.class);
+    public void openJanelaVisualizarPedidos(){
+        dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(principalCliente, dlgVisualizarPedidos, DlgVisualizarPedidos.class);
     }
    
-    public void openJanelaVisualizarPedidod(){
-        
-    }
+    
     public static void main(String[] args) {
         GerInterGrafica g = new GerInterGrafica();
         g.openJanelaLogin();

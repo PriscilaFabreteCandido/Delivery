@@ -44,7 +44,7 @@ public class DlgLogin extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Users\\2021122760232\\Documents\\NetBeansProjects\\X-FOMEAGR\\x-fome\\src\\main\\recourses\\logo.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Users\\2021122760232\\Documents\\NetBeansProjects\\X-FOMEAGR\\x-fome\\src\\main\\recourses\\imagens\\logo.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Email: ");
