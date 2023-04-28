@@ -36,7 +36,7 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         loja = new javax.swing.JMenu();
-        carrinho = new javax.swing.JMenu();
+        pedidos = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         confuguracoes = new javax.swing.JMenu();
 
@@ -55,18 +55,18 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
         });
         jMenuBar1.add(loja);
 
-        carrinho.setText("Carrinho");
-        carrinho.addMouseListener(new java.awt.event.MouseAdapter() {
+        pedidos.setText("Meus Pedidos");
+        pedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                carrinhoMouseClicked(evt);
+                pedidosMouseClicked(evt);
             }
         });
-        carrinho.addActionListener(new java.awt.event.ActionListener() {
+        pedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carrinhoActionPerformed(evt);
+                pedidosActionPerformed(evt);
             }
         });
-        jMenuBar1.add(carrinho);
+        jMenuBar1.add(pedidos);
         jMenuBar1.add(jMenu3);
 
         confuguracoes.setText("Minha Conta");
@@ -111,17 +111,17 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
         this.gerInterfaceGrafica.openJanelaUsuario();
     }//GEN-LAST:event_confuguracoesActionPerformed
 
-    private void carrinhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carrinhoMouseClicked
+    private void pedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pedidosMouseClicked
       this.gerInterfaceGrafica.openJanelaCarrinho();
-    }//GEN-LAST:event_carrinhoMouseClicked
+    }//GEN-LAST:event_pedidosMouseClicked
 
     private void confuguracoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confuguracoesMouseClicked
         this.gerInterfaceGrafica.openJanelaUsuario();
     }//GEN-LAST:event_confuguracoesMouseClicked
 
-    private void carrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrinhoActionPerformed
+    private void pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidosActionPerformed
         this.gerInterfaceGrafica.openJanelaCarrinho();
-    }//GEN-LAST:event_carrinhoActionPerformed
+    }//GEN-LAST:event_pedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,10 +129,10 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu carrinho;
     private javax.swing.JMenu confuguracoes;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu loja;
+    private javax.swing.JMenu pedidos;
     // End of variables declaration//GEN-END:variables
 }

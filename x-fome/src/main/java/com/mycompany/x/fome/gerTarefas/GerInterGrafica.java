@@ -69,6 +69,9 @@ public class GerInterGrafica {
         dlgCarrinho = (DlgCarrinho) abrirJanela(principalCliente, dlgCarrinho, DlgCarrinho.class);
     }
    
+    public void openJanelaVisualizarPedidod(){
+        
+    }
     public static void main(String[] args) {
         GerInterGrafica g = new GerInterGrafica();
         g.openJanelaLogin();
