@@ -5,7 +5,9 @@
  */
 package com.mycompany.x.fome.domain;
 
+import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,7 +16,8 @@ import javax.persistence.ManyToOne;
  *
  * @author 2021122760232
  */
-public class ProdutoPedido {
+@Entity
+public class ProdutoPedido implements Serializable{
     @ManyToOne ( fetch = FetchType.EAGER)
     @JoinColumn (name = "idProduto")
     private Produto produto;

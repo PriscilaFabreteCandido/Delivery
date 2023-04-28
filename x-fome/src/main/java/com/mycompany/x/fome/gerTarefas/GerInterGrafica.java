@@ -5,6 +5,7 @@
  */
 package com.mycompany.x.fome.gerTarefas;
 
+import com.mycompany.x.fome.dao.ConexaoHibernate;
 import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
 import com.mycompany.x.fome.view.DlgUsuario;
@@ -30,8 +31,11 @@ public class GerInterGrafica {
     private DlgUsuario dlgUsuario = null;
     private DlgLoja dlgLoja = null;
     private DlgVisualizarPedidos dlgVisualizarPedidos = null;
-
+    
     public GerInterGrafica() {
+        ConexaoHibernate.getSessionFactory();
+        
+        
     }
     
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {

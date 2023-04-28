@@ -5,9 +5,11 @@
  */
 package com.mycompany.x.fome.domain;
 import java.awt.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +24,8 @@ import javax.persistence.TemporalType;
  *
  * @author 2021122760232
  */
-public class Pedido {
+@Entity
+public class Pedido implements Serializable  {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idPedido;

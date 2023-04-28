@@ -13,10 +13,10 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <mapping class="com.mycompany.x.fome.domain.Categoria"></mapping>
-    <mapping class="com.mycompany.x.fome.domain.Pedido"></mapping>
+<!--    <mapping class="com.mycompany.x.fome.domain.Pedido"></mapping>
     <mapping class="com.mycompany.x.fome.domain.Produto"></mapping>
     <mapping class="com.mycompany.x.fome.domain.ProdutoPedido"></mapping>
     <mapping class="com.mycompany.x.fome.domain.Status"></mapping>
-    <mapping class="com.mycompany.x.fome.domain.Usuario"></mapping>
+    <mapping class="com.mycompany.x.fome.domain.Usuario"></mapping>-->
   </session-factory>
 </hibernate-configuration>
