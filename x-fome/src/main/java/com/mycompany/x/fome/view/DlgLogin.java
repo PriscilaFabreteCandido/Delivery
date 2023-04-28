@@ -17,11 +17,12 @@ public class DlgLogin extends javax.swing.JDialog {
      * Creates new form DlgLogin
      */
     
-    private GerInterGrafica gerIG = new GerInterGrafica();
+    private GerInterGrafica gerIG = null;
    
     public DlgLogin(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
         initComponents();
+        this.gerIG = gerIG;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +45,7 @@ public class DlgLogin extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Users\\2021122760232\\Documents\\NetBeansProjects\\X-FOMEAGR\\x-fome\\src\\main\\recourses\\imagens\\logo.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Email: ");

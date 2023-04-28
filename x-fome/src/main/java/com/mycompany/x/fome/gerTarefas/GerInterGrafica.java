@@ -34,8 +34,6 @@ public class GerInterGrafica {
     
     public GerInterGrafica() {
         ConexaoHibernate.getSessionFactory();
-        
-        
     }
     
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {

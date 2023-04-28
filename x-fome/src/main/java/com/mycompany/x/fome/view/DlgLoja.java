@@ -17,10 +17,11 @@ public class DlgLoja extends javax.swing.JDialog {
      * Creates new form DlgLoja
      */
     
-    
+    private GerInterGrafica gerIG = null;
     public DlgLoja(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
         initComponents();
+        this.gerIG = gerIG;
     }
 
     /**
