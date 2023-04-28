@@ -19,6 +19,6 @@ public class Status {
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idStatus;
     
-    @Column (name="senha", length = 250, nullable = false)
+    @Column (name="status", length = 250, nullable = false)
     private String status;
 }

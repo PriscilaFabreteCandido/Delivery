@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,6 +21,8 @@ public class Produto {
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idProduto;
     
+    @ManyToOne
+    @JoinColumn (name = "idCategoria")
     private Categoria categoria;
     
     @Column (name="nomeProduto", length = 250, nullable = false)

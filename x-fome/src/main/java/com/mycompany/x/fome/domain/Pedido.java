@@ -7,6 +7,7 @@ package com.mycompany.x.fome.domain;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,9 @@ public class Pedido {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idPedido;
+    
+    @ManyToOne
+    @JoinColumn (name = "idUsuario")
     private Usuario cliente;
     
     @ManyToOne
@@ -33,13 +37,14 @@ public class Pedido {
     
     @Temporal ( TemporalType.DATE )
     private Date data;
+    
+    @Column (name="endereco",length = 250, nullable = false)
     private String endereco;
     
     @OneToMany ( mappedBy = "produto", fetch =  FetchType.LAZY)
     private ArrayList<ProdutoPedido> produtos;
     
-    
+    @Column (name="taxa_entrega", nullable = false)
     private double taxa_entrega;
-    
     
 }
