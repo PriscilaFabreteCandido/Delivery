@@ -9,7 +9,9 @@ package com.mycompany.x.fome.domain;
  *
  * @author 2021122760232
  */
+
 public class Categoria {
+   
     private int idCategoria;
     private String nome;
 }
