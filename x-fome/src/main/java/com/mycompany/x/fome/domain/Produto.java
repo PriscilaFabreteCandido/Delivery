@@ -31,10 +31,7 @@ public class Produto {
     @Column (name="ingredientes", length = 250, nullable = false)
     private String ingredientes;
     
-    
-    private Double preco;
-
-  
-    
+    @Column (name="preco", nullable = false)
+    private double preco;
     
 }

@@ -5,6 +5,7 @@
  */
 package com.mycompany.x.fome.domain;
 
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,9 +16,12 @@ import javax.persistence.ManyToOne;
  */
 public class ProdutoPedido {
     @ManyToOne ( fetch = FetchType.EAGER)
-    @JoinColumn (name = "idPedido")
+    @JoinColumn (name = "idProduto")
     private Produto produto;
     
+    @Column (name="qtd", nullable = false)
     private int qtd;
+    
+    @Column (name="preco", nullable = false)
     private double preco;
 }

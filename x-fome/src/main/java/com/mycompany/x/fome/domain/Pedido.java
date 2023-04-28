@@ -44,7 +44,7 @@ public class Pedido {
     @OneToMany ( mappedBy = "produto", fetch =  FetchType.LAZY)
     private ArrayList<ProdutoPedido> produtos;
     
-    @Column (name="taxa_entrega", nullable = false)
+    @Column (name="taxaEntrega", nullable = false)
     private double taxa_entrega;
     
 }
