@@ -7,11 +7,14 @@ package com.mycompany.x.fome.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -48,4 +51,7 @@ public class Usuario implements Serializable {
      
     @Column (name="cidade", length = 250, nullable = false)
     private String cidade;
+    
+    @OneToMany ( mappedBy = "cliente", fetch =  FetchType.LAZY)
+    private List<Pedido> pedidos;
 }

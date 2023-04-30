@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package com.mycompany.x.fome.domain;
-import java.awt.List;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,7 +44,7 @@ public class Pedido implements Serializable  {
     private String endereco;
     
     @OneToMany ( mappedBy = "produto", fetch =  FetchType.LAZY)
-    private ArrayList<ProdutoPedido> produtos;
+    private List<ProdutoPedido> produtos;
     
     @Column (name="taxaEntrega", nullable = false)
     private double taxa_entrega;
