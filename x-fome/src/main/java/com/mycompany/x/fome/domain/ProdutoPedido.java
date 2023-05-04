@@ -20,7 +20,7 @@ import javax.persistence.ManyToOne;
  * @author 2021122760232
  */
 @Entity
-public class ProdutoPedido implements Serializable{
+public class ProdutoPedido implements Serializable {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idProdutoPedido;

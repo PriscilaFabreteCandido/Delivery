@@ -54,4 +54,70 @@ public class Usuario implements Serializable {
     
     @OneToMany ( mappedBy = "cliente", fetch =  FetchType.LAZY)
     private List<Pedido> pedidos;
+    
+    @Column (name="cpf", length = 250, nullable = false)
+    private String cpf;
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public Date getIdade() {
+        return idade;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public boolean isIsCliente() {
+        return isCliente;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public Usuario(String nomeUsuario, String endereco, Date idade, String cep, boolean isCliente, String email, String senha, String cidade, List<Pedido> pedidos, String cpf) {
+        this.nomeUsuario = nomeUsuario;
+        this.endereco = endereco;
+        this.idade = idade;
+        this.cep = cep;
+        this.isCliente = isCliente;
+        this.email = email;
+        this.senha = senha;
+        this.cidade = cidade;
+        this.pedidos = pedidos;
+        this.cpf = cpf;
+    }
+
+    public Usuario(String nomeUsuario, String endereco) {
+        this.nomeUsuario = nomeUsuario;
+        this.endereco = endereco;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+    
 }

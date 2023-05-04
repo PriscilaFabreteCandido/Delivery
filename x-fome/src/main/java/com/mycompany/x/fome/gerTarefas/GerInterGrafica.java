@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.gerTarefas;
 
 import com.mycompany.x.fome.dao.ConexaoHibernate;
+import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
 import com.mycompany.x.fome.view.DlgUsuario;
@@ -71,7 +72,10 @@ public class GerInterGrafica {
         dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(principalCliente, dlgVisualizarPedidos, DlgVisualizarPedidos.class);
     }
    
-    
+    public void createUsuario(Usuario usuario){
+        
+    }
+            
     public static void main(String[] args) {
         GerInterGrafica g = new GerInterGrafica();
         g.openJanelaLogin();
