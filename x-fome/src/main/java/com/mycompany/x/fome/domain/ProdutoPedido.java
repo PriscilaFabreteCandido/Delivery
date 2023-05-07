@@ -38,4 +38,44 @@ public class ProdutoPedido implements Serializable {
     
     @Column (name="preco", nullable = false)
     private double preco;
+
+    public int getIdProdutoPedido() {
+        return idProdutoPedido;
+    }
+
+    public void setIdProdutoPedido(int idProdutoPedido) {
+        this.idProdutoPedido = idProdutoPedido;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
 }

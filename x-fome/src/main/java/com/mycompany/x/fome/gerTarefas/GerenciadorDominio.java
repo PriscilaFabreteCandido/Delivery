@@ -5,6 +5,14 @@
  */
 package com.mycompany.x.fome.gerTarefas;
 
+import com.mycompany.x.fome.domain.Categoria;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 2021122760232
@@ -14,4 +22,7 @@ public class GerenciadorDominio {
     public GerenciadorDominio() {
     }
     
+    public List<Categoria> findAllCategoria(){
+        return null;
+    }
 }

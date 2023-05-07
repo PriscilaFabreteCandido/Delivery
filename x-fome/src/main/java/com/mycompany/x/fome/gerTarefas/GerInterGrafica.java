@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.gerTarefas;
 
 import com.mycompany.x.fome.dao.ConexaoHibernate;
+import com.mycompany.x.fome.domain.Categoria;
 import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
@@ -14,6 +15,10 @@ import com.mycompany.x.fome.view.DlgVisualizarPedidos;
 import com.mycompany.x.fome.view.FormPrincipalCliente;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -32,6 +37,7 @@ public class GerInterGrafica {
     private DlgUsuario dlgUsuario = null;
     private DlgLoja dlgLoja = null;
     private DlgVisualizarPedidos dlgVisualizarPedidos = null;
+    private GerenciadorDominio gerDominio;
     
     public GerInterGrafica() {
         ConexaoHibernate.getSessionFactory();
@@ -75,11 +81,25 @@ public class GerInterGrafica {
     public void createUsuario(Usuario usuario){
         
     }
-            
+    
+    public void carregarComboCategoria(JComboBox combo) {
+        
+        try {
+            List<Categoria> lista = gerDominio.findAllCategoria();
+            combo.setModel( new DefaultComboBoxModel( lista.toArray() )  );
+                                   
+        } catch (Exception  ex) {
+            JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar categorias " + ex.getMessage() );          
+        } 
+        
+        
+    }
+    
     public static void main(String[] args) {
         GerInterGrafica g = new GerInterGrafica();
         g.openJanelaLogin();
     }
+    
     
     
     

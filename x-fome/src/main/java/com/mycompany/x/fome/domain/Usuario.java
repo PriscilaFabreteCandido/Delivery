@@ -34,7 +34,8 @@ public class Usuario implements Serializable {
     @Column (name="endereco", length = 250, nullable = false)
     private String endereco;
     
-    @Temporal ( TemporalType.DATE )
+    @Temporal ( TemporalType.DATE)
+    @Column (name="idade", nullable = true)
     private Date idade;
     
     @Column (name="cep", length = 250, nullable = false)

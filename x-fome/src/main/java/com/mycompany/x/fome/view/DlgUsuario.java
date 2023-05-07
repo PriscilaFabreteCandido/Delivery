@@ -22,6 +22,7 @@ public class DlgUsuario extends javax.swing.JDialog {
     public DlgUsuario(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
         initComponents();
+        this.gerIG = gerIG;
         this.preencherCampos();
     }
     
@@ -67,7 +68,7 @@ public class DlgUsuario extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tela de Cadastro"));
 
         jLabel1.setText("Nome:");
 

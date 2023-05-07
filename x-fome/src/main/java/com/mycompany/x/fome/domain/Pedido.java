@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
  * @author 2021122760232
  */
 @Entity
+
 public class Pedido implements Serializable  {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
@@ -48,5 +49,61 @@ public class Pedido implements Serializable  {
     
     @Column (name="taxaEntrega", nullable = false)
     private double taxa_entrega;
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    public Usuario getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<ProdutoPedido> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<ProdutoPedido> produtos) {
+        this.produtos = produtos;
+    }
+
+    public double getTaxa_entrega() {
+        return taxa_entrega;
+    }
+
+    public void setTaxa_entrega(double taxa_entrega) {
+        this.taxa_entrega = taxa_entrega;
+    }
     
 }
