@@ -24,6 +24,9 @@ public class ProdutoPedido implements Serializable {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idProdutoPedido;
+
+    public ProdutoPedido() {
+    }
     
     @ManyToOne ( fetch = FetchType.EAGER)
     @JoinColumn (name = "idProduto")

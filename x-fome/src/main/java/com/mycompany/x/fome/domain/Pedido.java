@@ -33,6 +33,9 @@ public class Pedido implements Serializable  {
     @ManyToOne
     @JoinColumn (name = "idUsuario")
     private Usuario cliente;
+
+    public Pedido() {
+    }
     
     @ManyToOne
     @JoinColumn (name = "idStatus")

@@ -36,7 +36,10 @@ public class Produto implements Serializable {
     
     @Column (name="preco", nullable = false)
     private double preco;
-
+    
+    public Produto(){
+        
+    }
     public int getIdProduto() {
         return idProduto;
     }

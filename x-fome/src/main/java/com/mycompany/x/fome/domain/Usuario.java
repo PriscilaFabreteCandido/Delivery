@@ -30,6 +30,9 @@ public class Usuario implements Serializable {
     
     @Column (name="nomeUsuario", length = 250, nullable = false)
     private String nomeUsuario;
+
+    public Usuario() {
+    }
     
     @Column (name="endereco", length = 250, nullable = false)
     private String endereco;

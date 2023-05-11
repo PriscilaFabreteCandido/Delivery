@@ -21,6 +21,9 @@ public class Status implements Serializable{
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idStatus;
+
+    public Status() {
+    }
     
     @Column (name="status", length = 250, nullable = false)
     private String status;

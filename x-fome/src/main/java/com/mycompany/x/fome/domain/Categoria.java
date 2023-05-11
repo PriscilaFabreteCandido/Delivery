@@ -31,6 +31,9 @@ public class Categoria implements Serializable {
         return nome;
     }
 
+    public Categoria() {
+    }
+
     public int getIdCategoria() {
         return idCategoria;
     }
