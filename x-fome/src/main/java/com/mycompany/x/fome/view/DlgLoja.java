@@ -5,6 +5,7 @@
  */
 package com.mycompany.x.fome.view;
 
+import com.mycompany.x.fome.domain.Categoria;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
 
 /**
@@ -22,7 +23,7 @@ public class DlgLoja extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.gerIG = gerIG;
-        this.gerIG.carregarComboCategoria(categoriaCombobox);
+        this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
     }
 
     /**
@@ -85,6 +86,11 @@ public class DlgLoja extends javax.swing.JDialog {
         );
 
         adicionar.setText("Adicionar");
+        adicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +148,10 @@ public class DlgLoja extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
+       
+    }//GEN-LAST:event_adicionarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -44,7 +44,7 @@ public class Pedido implements Serializable  {
     @Column (name="endereco",length = 250, nullable = false)
     private String endereco;
     
-    @OneToMany ( mappedBy = "produto", fetch =  FetchType.LAZY)
+    @OneToMany ( mappedBy = "pedido", fetch =  FetchType.LAZY)
     private List<ProdutoPedido> produtos;
     
     @Column (name="taxaEntrega", nullable = false)

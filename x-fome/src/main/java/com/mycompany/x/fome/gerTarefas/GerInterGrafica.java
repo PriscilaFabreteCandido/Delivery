@@ -21,6 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -37,7 +38,7 @@ public class GerInterGrafica {
     private DlgUsuario dlgUsuario = null;
     private DlgLoja dlgLoja = null;
     private DlgVisualizarPedidos dlgVisualizarPedidos = null;
-    private GerenciadorDominio gerDominio;
+    private GerenciadorDominio gerDominio = new GerenciadorDominio();
     
     public GerInterGrafica() {
         ConexaoHibernate.getSessionFactory();
@@ -82,16 +83,15 @@ public class GerInterGrafica {
         
     }
     
-    public void carregarComboCategoria(JComboBox combo) {
+   public void carregarComboCategoria(JComboBox combo, Class classe) {
         
         try {
-            List<Categoria> lista = gerDominio.findAllCategoria();
-            combo.setModel( new DefaultComboBoxModel( lista.toArray() )  );
+            List<Categoria> lista = gerDominio.listar(classe);
+            combo.setModel( new DefaultComboBoxModel( lista.toArray() ));
                                    
-        } catch (Exception  ex) {
-            JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar categorias " + ex.getMessage() );          
+        } catch (HibernateException  ex) {
+            JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );          
         } 
-        
         
     }
     

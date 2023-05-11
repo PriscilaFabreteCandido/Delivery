@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.domain;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,4 +46,10 @@ public class Categoria implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    public Categoria(int idCategoria, String nome) {
+        this.idCategoria = idCategoria;
+        this.nome = nome;
+    }
+
 }
