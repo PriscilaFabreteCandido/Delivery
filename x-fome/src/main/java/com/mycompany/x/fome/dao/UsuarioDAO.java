@@ -5,13 +5,15 @@
  */
 package com.mycompany.x.fome.dao;
 
+import com.mycompany.x.fome.domain.Usuario;
+
 /**
  *
  * @author prisc
  */
 public class UsuarioDAO {
-    public void findAll(){
-        
+    public Usuario findByEmailAndSenha(){
+        return null;
     }
     
     

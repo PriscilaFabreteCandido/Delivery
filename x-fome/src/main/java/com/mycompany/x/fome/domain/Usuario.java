@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -36,10 +37,6 @@ public class Usuario implements Serializable {
     
     @Column (name="endereco", length = 250, nullable = false)
     private String endereco;
-    
-    @Temporal ( TemporalType.DATE)
-    @Column (name="idade", nullable = true)
-    private Date idade;
     
     @Column (name="cep", length = 250, nullable = false)
     private String cep;
@@ -74,10 +71,6 @@ public class Usuario implements Serializable {
         return endereco;
     }
 
-    public Date getIdade() {
-        return idade;
-    }
-
     public String getCep() {
         return cep;
     }
@@ -102,10 +95,9 @@ public class Usuario implements Serializable {
         return cidade;
     }
 
-    public Usuario(String nomeUsuario, String endereco, Date idade, String cep, boolean isCliente, String email, String senha, String cidade, List<Pedido> pedidos, String cpf) {
+    public Usuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, List<Pedido> pedidos, String cpf) {
         this.nomeUsuario = nomeUsuario;
         this.endereco = endereco;
-        this.idade = idade;
         this.cep = cep;
         this.isCliente = isCliente;
         this.email = email;
@@ -113,6 +105,19 @@ public class Usuario implements Serializable {
         this.cidade = cidade;
         this.pedidos = pedidos;
         this.cpf = cpf;
+        
+    }
+
+    public Usuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, String cpf) {
+        this.nomeUsuario = nomeUsuario;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.isCliente = isCliente;
+        this.email = email;
+        this.senha = senha;
+        this.cidade = cidade;
+        this.cpf = cpf;
+        this.pedidos = new ArrayList<Pedido>();
     }
 
     public Usuario(String nomeUsuario, String endereco) {

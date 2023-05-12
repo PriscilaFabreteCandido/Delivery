@@ -8,6 +8,7 @@ package com.mycompany.x.fome.gerTarefas;
 import com.mycompany.x.fome.dao.ConexaoHibernate;
 import com.mycompany.x.fome.dao.GenericDAO;
 import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,11 @@ public class GerenciadorDominio {
     // GENÉRICOS
     public List listar(Class classe) throws HibernateException {        
         return genDao.listar(classe);        
+    }
+    
+    public void insertUsuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, String cpf){
+        Usuario insertUsuario = new Usuario(nomeUsuario, endereco, cep, isCliente, email, senha, cidade, cpf);
+        genDao.inserir(insertUsuario);
     }
     
     // GENÉRICOS

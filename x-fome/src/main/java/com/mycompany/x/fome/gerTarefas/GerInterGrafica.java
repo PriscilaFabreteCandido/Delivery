@@ -56,7 +56,10 @@ public class GerInterGrafica {
         return dlg;
     }
     
- 
+    public GerenciadorDominio getGerDominio() {
+        return gerDominio;
+    }
+    
     public void openJanelaPrincipalCliente(){
         principalCliente = new FormPrincipalCliente();
         principalCliente.setVisible(true);

@@ -17,26 +17,6 @@ import org.hibernate.Session;
  */
 public class ProdutoDAO {
     
-    public List<Produto> getAllProdutosByCategoria(Categoria categoria) throws HibernateException {        
-        
-        Session sessao = null;
-        
-        try {
-            sessao = ConexaoHibernate.getSessionFactory().openSession();
-            sessao.beginTransaction();
-
-            //OPERAÇÕES
-            sessao.save(obj);
-
-            sessao.getTransaction().commit();              
-            sessao.close();
-        } catch( HibernateException erro) {
-            if ( sessao != null ){
-                sessao.getTransaction().rollback();
-                sessao.close();
-            }
-            throw new HibernateException(erro);
-        }
-    }
+  
     
 }
