@@ -7,6 +7,7 @@ package com.mycompany.x.fome.gerTarefas;
 
 import com.mycompany.x.fome.dao.ConexaoHibernate;
 import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
@@ -20,7 +21,10 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 
 /**
@@ -86,18 +90,33 @@ public class GerInterGrafica {
         
     }
     
-   public void carregarComboCategoria(JComboBox combo, Class classe) {
-        
-        try {
-            List<Categoria> lista = gerDominio.listar(classe);
-            combo.setModel( new DefaultComboBoxModel( lista.toArray() ));
-                                   
-        } catch (HibernateException  ex) {
-            JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );          
-        } 
-        
+    public void carregarComboCategoria(JComboBox combo, Class classe) {
+
+         try {
+             List<Categoria> lista = gerDominio.listar(classe);
+             combo.setModel( new DefaultComboBoxModel( lista.toArray() ));
+
+         } catch (HibernateException  ex) {
+             JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );          
+         } 
+
     }
-    
+   
+    public void carregarListaProdutosPorCategoria(JList produtos, Categoria categoria){
+        try {
+             List<Produto> lista = gerDominio.findProdutosByCategoria(categoria);
+             try{
+                 produtos.setModel( new DefaultComboBoxModel( lista.toArray() ));
+             }catch(Exception  ex){
+                 JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );  
+             }
+
+         } catch (HibernateException  ex) {
+             JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );          
+         } 
+
+    }
+   
     public static void main(String[] args) {
         GerInterGrafica g = new GerInterGrafica();
         g.openJanelaLogin();

@@ -79,5 +79,10 @@ public class Produto implements Serializable {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+
+    @Override
+    public String toString() {
+        return nomeProduto + " , ingredientes: " + ingredientes + ",  R$ " + preco;
+    }
     
 }

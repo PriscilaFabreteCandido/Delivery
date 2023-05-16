@@ -6,7 +6,13 @@
 package com.mycompany.x.fome.view;
 
 import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,12 +25,19 @@ public class DlgLoja extends javax.swing.JDialog {
      */
     
     private GerInterGrafica gerIG = null;
+    
     public DlgLoja(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
         initComponents();
         this.gerIG = gerIG;
+        this.loadCombobox();
     }
-
+    
+    public void loadCombobox(){
+        this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
+        Categoria categoria = (Categoria) this.categoriaCombobox.getModel().getSelectedItem();
+        this.gerIG.carregarListaProdutosPorCategoria(produtos, categoria);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,15 +52,15 @@ public class DlgLoja extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         produtos = new javax.swing.JList<>();
-        jSpinner3 = new javax.swing.JSpinner();
+        qtd = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         realizarPedido = new javax.swing.JButton();
         adicionar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableProdutos = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        total = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -60,6 +73,11 @@ public class DlgLoja extends javax.swing.JDialog {
         categoriaCombobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoriaComboboxActionPerformed(evt);
+            }
+        });
+        categoriaCombobox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                categoriaComboboxPropertyChange(evt);
             }
         });
 
@@ -89,7 +107,7 @@ public class DlgLoja extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(255, 204, 204));
         jButton1.setText("Excluir");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -100,11 +118,11 @@ public class DlgLoja extends javax.swing.JDialog {
                 "Produtos", "Qtd", "Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableProdutos);
 
         jLabel6.setText("Total: ");
 
-        jLabel7.setText("jLabel7");
+        total.setText("R$ 30,00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,14 +138,14 @@ public class DlgLoja extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(qtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel7))
+                                .addComponent(total))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -155,7 +173,7 @@ public class DlgLoja extends javax.swing.JDialog {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(qtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(adicionar)
                     .addComponent(jButton1))
@@ -164,7 +182,7 @@ public class DlgLoja extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(realizarPedido)
                 .addContainerGap())
@@ -174,17 +192,56 @@ public class DlgLoja extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
-       
+        loadTableLoja(tableProdutos);
     }//GEN-LAST:event_adicionarActionPerformed
 
     private void categoriaComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaComboboxActionPerformed
-        // TODO add your handling code here:
+       
+        Categoria categoria = (Categoria) this.categoriaCombobox.getModel().getSelectedItem();
+        this.gerIG.carregarListaProdutosPorCategoria(produtos, categoria);
     }//GEN-LAST:event_categoriaComboboxActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
+        
     }//GEN-LAST:event_formComponentShown
 
+    private void categoriaComboboxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_categoriaComboboxPropertyChange
+       
+    }//GEN-LAST:event_categoriaComboboxPropertyChange
+    
+    public void loadTableLoja(JTable tabela) {
+        DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
+        tableModel.setRowCount(0);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tableProdutos.setDefaultRenderer(Object.class, centerRenderer);
+
+//        for (Origami origami : origamis) {
+//            if (condicao.equals(origami.getCategoria())) {
+//            String nome = origami.getNome();
+//            String dificuldade = origami.getDificuldade();
+//            String papel = origami.getTipoPapel();
+//            float preco = origami.getPreco();
+//
+//            String precoStr = "R$ " + Float.toString(preco);
+//
+//            Object[] rowData = {nome, dificuldade, papel, precoStr};
+//            tableModel.addRow(rowData);
+//            }
+//        }
+//        
+        if(!this.produtos.getSelectedValuesList().isEmpty() && this.produtos.getSelectedValuesList().size() > 0){
+            List<Produto> selectedProdutos =  (List<Produto>) (Produto) this.produtos.getSelectedValuesList();
+            for(Produto prod : selectedProdutos){
+                Object[] rowData = {prod.getNomeProduto(), qtd.getValue(), "1555"};
+                tableModel.addRow(rowData);
+            }
+        }
+
+        tabela.setModel(tableModel);
+        tabela.setShowVerticalLines(false);
+    }
     /**
      * @param args the command line arguments
      */
@@ -197,13 +254,13 @@ public class DlgLoja extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JList<String> produtos;
+    private javax.swing.JSpinner qtd;
     private javax.swing.JButton realizarPedido;
+    private javax.swing.JTable tableProdutos;
+    private javax.swing.JLabel total;
     // End of variables declaration//GEN-END:variables
 }
