@@ -1,0 +1,8 @@
+insert into `x-fome`.categoria(nome) values ('Sobremesa'), ('Porções'), ('Hamburguers');
+insert into `x-fome`.produto(ingredientes, nomeProduto, preco, idCategoria) 
+values ('Pão, Bifé, Bacon', 'X-Bacon', 15, 3), 
+	   ('Pão, Bifé, Ovo', 'X-Ovo', 13, 3),
+       ('Fritas, Alcatra, Alface', 'Alcatra', 70, 2),
+       ('Fritas, Peixe, Alface', 'Peixe', 70, 2),
+       ('Leite em pó, Açaí, Leite Condesado', 'Açaí 500ml', 15, 1),
+       ('Leite em pó, Açaí, Leite Condesado', 'Açaí 1LS', 15, 1);

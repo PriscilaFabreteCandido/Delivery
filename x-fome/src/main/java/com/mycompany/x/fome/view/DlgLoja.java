@@ -8,7 +8,7 @@ package com.mycompany.x.fome.view;
 import com.mycompany.x.fome.domain.Categoria;
 import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
-import java.util.List;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -25,6 +25,7 @@ public class DlgLoja extends javax.swing.JDialog {
      */
     
     private GerInterGrafica gerIG = null;
+    private ArrayList<Produto> selectedProdutos = null;
     
     public DlgLoja(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
@@ -36,7 +37,10 @@ public class DlgLoja extends javax.swing.JDialog {
     public void loadCombobox(){
         this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
         Categoria categoria = (Categoria) this.categoriaCombobox.getModel().getSelectedItem();
-        this.gerIG.carregarListaProdutosPorCategoria(produtos, categoria);
+        if(categoria != null){
+             this.gerIG.carregarListaProdutosPorCategoria(produtos, categoria);
+        }
+       
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,7 +126,7 @@ public class DlgLoja extends javax.swing.JDialog {
 
         jLabel6.setText("Total: ");
 
-        total.setText("R$ 30,00");
+        total.setText("R$ 0,00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,37 +214,44 @@ public class DlgLoja extends javax.swing.JDialog {
     }//GEN-LAST:event_categoriaComboboxPropertyChange
     
     public void loadTableLoja(JTable tabela) {
+       
+        
         DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
-        tableModel.setRowCount(0);
-
+        
+        if(selectedProdutos == null){
+            tableModel.setRowCount(0);
+            selectedProdutos = new ArrayList<Produto>();
+        }
+        
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         tableProdutos.setDefaultRenderer(Object.class, centerRenderer);
 
-//        for (Origami origami : origamis) {
-//            if (condicao.equals(origami.getCategoria())) {
-//            String nome = origami.getNome();
-//            String dificuldade = origami.getDificuldade();
-//            String papel = origami.getTipoPapel();
-//            float preco = origami.getPreco();
-//
-//            String precoStr = "R$ " + Float.toString(preco);
-//
-//            Object[] rowData = {nome, dificuldade, papel, precoStr};
-//            tableModel.addRow(rowData);
-//            }
-//        }
-//        
         if(!this.produtos.getSelectedValuesList().isEmpty() && this.produtos.getSelectedValuesList().size() > 0){
-            List<Produto> selectedProdutos =  (List<Produto>) (Produto) this.produtos.getSelectedValuesList();
-            for(Produto prod : selectedProdutos){
-                Object[] rowData = {prod.getNomeProduto(), qtd.getValue(), "1555"};
+            Object[] produtosList = this.produtos.getSelectedValuesList().toArray();
+            
+            for(Object prod : produtosList){
+                Produto p = (Produto) prod;
+                Double total = Double.parseDouble(qtd.getValue().toString()) * p.getPreco();
+                Object[] rowData = {p.getNomeProduto(), qtd.getValue(), total};
+                
                 tableModel.addRow(rowData);
+                selectedProdutos.add(p);
             }
+            
         }
 
-        tabela.setModel(tableModel);
+       
         tabela.setShowVerticalLines(false);
+    }
+    
+    public Double getTotal(){
+        Double total = 0.0;
+        if(selectedProdutos != null){
+            for(Produto prod : selectedProdutos){
+                total += prod.getPreco();
+            } 
+        }
     }
     /**
      * @param args the command line arguments

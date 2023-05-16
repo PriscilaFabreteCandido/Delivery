@@ -242,7 +242,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="total">
       <Properties>
-        <Property name="text" type="java.lang.String" value="R$ 30,00"/>
+        <Property name="text" type="java.lang.String" value="R$ 0,00"/>
       </Properties>
     </Component>
   </SubComponents>
