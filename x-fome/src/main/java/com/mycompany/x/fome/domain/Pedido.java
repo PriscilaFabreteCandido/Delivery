@@ -47,6 +47,9 @@ public class Pedido implements Serializable  {
     @Column (name="endereco",length = 250, nullable = false)
     private String endereco;
     
+    @Column (name="isRetirarNaLoja",nullable = false)
+    private boolean isRetirarNaLoja;
+    
     @OneToMany ( mappedBy = "pedido", fetch =  FetchType.LAZY)
     private List<ProdutoPedido> produtos;
     
@@ -63,6 +66,15 @@ public class Pedido implements Serializable  {
 
     public Usuario getCliente() {
         return cliente;
+    }
+
+    public Pedido(Usuario cliente, Status status, Date data, String endereco, boolean isRetirarNaLoja, double taxa_entrega) {
+        this.cliente = cliente;
+        this.status = status;
+        this.data = data;
+        this.endereco = endereco;
+        this.isRetirarNaLoja = isRetirarNaLoja;
+        this.taxa_entrega = taxa_entrega;
     }
 
     public void setCliente(Usuario cliente) {

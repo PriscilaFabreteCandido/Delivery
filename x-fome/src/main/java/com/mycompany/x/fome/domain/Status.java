@@ -26,7 +26,7 @@ public class Status implements Serializable{
     }
     
     @Column (name="nome", length = 250, nullable = false)
-    private String status;
+    private String nome;
 
     public int getIdStatus() {
         return idStatus;
@@ -36,11 +36,18 @@ public class Status implements Serializable{
         this.idStatus = idStatus;
     }
 
-    public String getStatus() {
-        return status;
+    public Status(int idStatus, String nome) {
+        this.idStatus = idStatus;
+        this.nome = nome;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getNome() {
+        return nome;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    
 }

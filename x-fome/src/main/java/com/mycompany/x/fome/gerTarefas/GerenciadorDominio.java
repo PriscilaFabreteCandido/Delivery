@@ -17,6 +17,7 @@ import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.domain.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
@@ -43,7 +44,7 @@ public class GerenciadorDominio {
             produtoDAO = new ProdutoDAO();
             usuarioDAO = new UsuarioDAO();
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Deuu erro" + ex.getMessage() );          
+            JOptionPane.showMessageDialog(null, "Deu erro" + ex.getMessage() );          
         }
     }
     
@@ -68,7 +69,7 @@ public class GerenciadorDominio {
     }
     
     //Pedido
-   public void efetuarPedido(Vector pedidos) {
+   public void efetuarPedido(Vector pedidos, boolean isRetirarNaLoja) {
         if (pedidos != null) {
             for (Object obj : pedidos) {
                 if (obj instanceof Vector) {
@@ -79,13 +80,11 @@ public class GerenciadorDominio {
                         Produto primeiroAtributo = (Produto) produto.get(0);
                         Integer qtd = (Integer) produto.get(1);
                         JOptionPane.showMessageDialog(null, primeiroAtributo.getNomeProduto() + qtd);
-                        // Acessando o primeiro atributo
-                        // Faça o que desejar com o primeiro atributo...
-                        // ...
+
+                        List<Status> statusList = genDao.listar(Status.class);
+                        Status status = statusList.stream().filter(x -> x.getNome().equals("Pendente")).findFirst().get();
                         
-                        Pedido pedido = new Pedido();
-                        List<Status> statusList = 
-                        pedido.setCliente(usuario);
+                        Pedido pedido = new Pedido(usuario, status, new Date(), usuario.getEndereco(), isRetirarNaLoja, 2.2);
                         
                         ProdutoPedido produtoPedido = new ProdutoPedido();
                         
