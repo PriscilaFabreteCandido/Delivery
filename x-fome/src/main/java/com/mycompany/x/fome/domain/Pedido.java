@@ -68,15 +68,17 @@ public class Pedido implements Serializable  {
         return cliente;
     }
 
-    public Pedido(Usuario cliente, Status status, Date data, String endereco, boolean isRetirarNaLoja, double taxa_entrega) {
+    public Pedido(Usuario cliente, Status status, Date data, String endereco, boolean isRetirarNaLoja, List<ProdutoPedido> produtos, double taxa_entrega) {
         this.cliente = cliente;
         this.status = status;
         this.data = data;
         this.endereco = endereco;
         this.isRetirarNaLoja = isRetirarNaLoja;
+        this.produtos = produtos;
         this.taxa_entrega = taxa_entrega;
     }
 
+    
     public void setCliente(Usuario cliente) {
         this.cliente = cliente;
     }

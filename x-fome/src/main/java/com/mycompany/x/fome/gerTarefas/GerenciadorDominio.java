@@ -79,16 +79,12 @@ public class GerenciadorDominio {
                         
                         Produto primeiroAtributo = (Produto) produto.get(0);
                         Integer qtd = (Integer) produto.get(1);
-                        JOptionPane.showMessageDialog(null, primeiroAtributo.getNomeProduto() + qtd);
-
                         List<Status> statusList = genDao.listar(Status.class);
                         Status status = statusList.stream().filter(x -> x.getNome().equals("Pendente")).findFirst().get();
                         
                         Pedido pedido = new Pedido(usuario, status, new Date(), usuario.getEndereco(), isRetirarNaLoja, 2.2);
                         
                         ProdutoPedido produtoPedido = new ProdutoPedido();
-                        
-                        
                         }
                     }
                 }
