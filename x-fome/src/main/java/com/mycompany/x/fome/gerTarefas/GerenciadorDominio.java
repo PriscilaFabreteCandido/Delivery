@@ -60,9 +60,22 @@ public class GerenciadorDominio {
     }
     
     //Pedido
-    public void efetuarPedido(Vector pedidos){
-        for(){
+   public void efetuarPedido(Object[] pedidos){
+//       JOptionPane.showMessageDialog(null, pedidos);
+    if(pedidos != null){
+        for(Object obj : pedidos){
+            Object[] pedido = (Object[]) obj;
+            JOptionPane.showMessageDialog(null, pedido.length);
+            if(pedido.length <= 2){
+                // Acessando o primeiro atributo
+                Produto primeiroAtributo = (Produto) pedido[0];
+                String qtd = (String) pedido[1];
+                JOptionPane.showMessageDialog(null, primeiroAtributo.getNomeProduto() +  qtd);
+                // Faça o que desejar com o primeiro atributo...
+                // ...
+            }
             
         }
     }
+}
 }
