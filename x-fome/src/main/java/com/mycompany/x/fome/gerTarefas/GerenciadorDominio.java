@@ -10,7 +10,10 @@ import com.mycompany.x.fome.dao.GenericDAO;
 import com.mycompany.x.fome.dao.ProdutoDAO;
 import com.mycompany.x.fome.dao.UsuarioDAO;
 import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Pedido;
 import com.mycompany.x.fome.domain.Produto;
+import com.mycompany.x.fome.domain.ProdutoPedido;
+import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.domain.Usuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -69,16 +72,24 @@ public class GerenciadorDominio {
         if (pedidos != null) {
             for (Object obj : pedidos) {
                 if (obj instanceof Vector) {
-                    Vector pedido = (Vector) obj;
+                    Vector produto = (Vector) obj;
                     JOptionPane.showMessageDialog(null, obj);
-                    if (pedido.size() >= 2) {
+                    if (produto.size() >= 2) {
                         
-                        Produto primeiroAtributo = (Produto) pedido.get(0);
-                        Integer qtd = (Integer) pedido.get(1);
+                        Produto primeiroAtributo = (Produto) produto.get(0);
+                        Integer qtd = (Integer) produto.get(1);
                         JOptionPane.showMessageDialog(null, primeiroAtributo.getNomeProduto() + qtd);
                         // Acessando o primeiro atributo
                         // Faça o que desejar com o primeiro atributo...
                         // ...
+                        
+                        Pedido pedido = new Pedido();
+                        List<Status> statusList = 
+                        pedido.setCliente(usuario);
+                        
+                        ProdutoPedido produtoPedido = new ProdutoPedido();
+                        
+                        
                         }
                     }
                 }
