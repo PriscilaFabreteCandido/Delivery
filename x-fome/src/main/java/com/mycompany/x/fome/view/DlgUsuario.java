@@ -214,9 +214,26 @@ public class DlgUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-
-        this.gerIG.getGerDominio().insertUsuario(usuario.getNomeUsuario(), usuario.getEndereco(), usuario.getCep(), true, usuario.getEmail(), usuario.getSenha(),cidadeCombobox.getSelectedItem().toString() , usuario.getCpf());
-        JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
+        if(usuario == null){
+            String cidade = "Colatina";
+            switch (cidadeCombobox.getSelectedIndex()) {
+                case 2:
+                    cidade = "Vitória";
+                    break;
+                case 3:
+                    cidade = "Cariacica";
+                    break;
+                default:
+                     break;
+            }
+            
+            this.gerIG.getGerDominio().insertUsuario(nome.getText(), endereco.getText(), cep.getText(), true, email.getText(), String.valueOf(senha.getPassword()), cidade, cpf.getText());
+            JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
+        }else{
+            
+        }
+        
+        
         this.setVisible(false);
     }//GEN-LAST:event_enviarActionPerformed
 

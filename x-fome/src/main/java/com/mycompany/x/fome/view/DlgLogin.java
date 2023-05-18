@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.view;
 
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -140,7 +141,12 @@ public class DlgLogin extends javax.swing.JDialog {
 
     private void realizarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarLoginActionPerformed
         this.setVisible(false);
-        gerIG.openJanelaPrincipalCliente();
+        if(gerIG.getGerDominio().efetuarLogin(email.getText(), senha.getText())){
+            gerIG.openJanelaPrincipalCliente();
+        }else{
+            JOptionPane.showMessageDialog(null, "Usuário ou senha inválida");
+        }
+        
     }//GEN-LAST:event_realizarLoginActionPerformed
 
     /**

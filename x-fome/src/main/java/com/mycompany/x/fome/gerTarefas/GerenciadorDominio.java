@@ -8,6 +8,7 @@ package com.mycompany.x.fome.gerTarefas;
 import com.mycompany.x.fome.dao.ConexaoHibernate;
 import com.mycompany.x.fome.dao.GenericDAO;
 import com.mycompany.x.fome.dao.ProdutoDAO;
+import com.mycompany.x.fome.dao.UsuarioDAO;
 import com.mycompany.x.fome.domain.Categoria;
 import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.domain.Usuario;
@@ -28,12 +29,16 @@ public class GerenciadorDominio {
     
    GenericDAO genDao = null;
    ProdutoDAO produtoDAO = null;
+   UsuarioDAO usuarioDAO = null;
+   Usuario usuario = null;
+   
    public GerenciadorDominio() throws HibernateException {
         // TESTE
         try{
             ConexaoHibernate.getSessionFactory();
             genDao = new GenericDAO();
             produtoDAO = new ProdutoDAO();
+            usuarioDAO = new UsuarioDAO();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Deuu erro" + ex.getMessage() );          
         }
@@ -79,4 +84,12 @@ public class GerenciadorDominio {
                 }
         }
     }
+   
+   public boolean efetuarLogin(String email, String senha){
+       Usuario usuario = usuarioDAO.findByEmailAndSenha(email, senha);
+       if(usuario != null){
+           return true;
+       }
+       return false;
+   }
 }
