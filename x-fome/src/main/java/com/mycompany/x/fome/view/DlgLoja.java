@@ -272,7 +272,7 @@ public class DlgLoja extends javax.swing.JDialog {
 
     private void realizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarPedidoActionPerformed
         DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
-        this.gerIG.getGerDominio().efetuarPedido(tableModel.getDataVector());
+        this.gerIG.getGerDominio().efetuarPedido(tableModel.getDataVector(), false);
     }//GEN-LAST:event_realizarPedidoActionPerformed
     
     public void loadTableLoja(JTable tabela) {
