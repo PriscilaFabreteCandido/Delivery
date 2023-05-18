@@ -67,10 +67,11 @@ public class GerenciadorDominio {
                     Vector pedido = (Vector) obj;
                     JOptionPane.showMessageDialog(null, obj);
                     if (pedido.size() >= 2) {
-                        JOptionPane.showMessageDialog(null, "veio aquiii");
-                        // Acessando o primeiro atributo
+                        
                         Produto primeiroAtributo = (Produto) pedido.get(0);
-                        String qtd = (String) pedido.get(1);
+                        Integer qtd = (Integer) pedido.get(1);
+                        JOptionPane.showMessageDialog(null, primeiroAtributo.getNomeProduto() + qtd);
+                        // Acessando o primeiro atributo
                         // Faça o que desejar com o primeiro atributo...
                         // ...
                         }
