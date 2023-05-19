@@ -7,6 +7,7 @@ package com.mycompany.x.fome.gerTarefas;
 
 import com.mycompany.x.fome.dao.ConexaoHibernate;
 import com.mycompany.x.fome.dao.GenericDAO;
+import com.mycompany.x.fome.dao.PedidoDAO;
 import com.mycompany.x.fome.dao.ProdutoDAO;
 import com.mycompany.x.fome.dao.UsuarioDAO;
 import com.mycompany.x.fome.domain.Categoria;
@@ -35,6 +36,7 @@ public class GerenciadorDominio {
    ProdutoDAO produtoDAO = null;
    UsuarioDAO usuarioDAO = null;
    Usuario usuario = null;
+   PedidoDAO pedidoDAO = null;
    
    public GerenciadorDominio() throws HibernateException {
         // TESTE
@@ -43,6 +45,7 @@ public class GerenciadorDominio {
             genDao = new GenericDAO();
             produtoDAO = new ProdutoDAO();
             usuarioDAO = new UsuarioDAO();
+            pedidoDAO = new PedidoDAO();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Deu erro" + ex.getMessage() );          
         }
@@ -70,29 +73,46 @@ public class GerenciadorDominio {
     
     //Pedido
    public void efetuarPedido(Vector pedidos, boolean isRetirarNaLoja) {
+       boolean salvouPedido = false;
+       Pedido pedido = null;
+       List<Produto> produtoList = new ArrayList<>();
         if (pedidos != null) {
             for (Object obj : pedidos) {
                 if (obj instanceof Vector) {
-                    Vector produto = (Vector) obj;
-                    JOptionPane.showMessageDialog(null, obj);
-                    if (produto.size() >= 2) {
-                        
-                        Produto primeiroAtributo = (Produto) produto.get(0);
-                        Integer qtd = (Integer) produto.get(1);
-                        List<Status> statusList = genDao.listar(Status.class);
-                        Status status = statusList.stream().filter(x -> x.getNome().equals("Pendente")).findFirst().get();
-                        
-                        Pedido pedido = new Pedido(usuario, status, new Date(), usuario.getEndereco(), isRetirarNaLoja, 2.2);
-                        
-                        ProdutoPedido produtoPedido = new ProdutoPedido();
+                    Vector item = (Vector) obj;
+
+                    if (item.size() >= 2) {
+                            Produto produto = (Produto) item.get(0);
+                            Integer qtd = (Integer) item.get(1);
+
+                            List<Status> statusList = genDao.listar(Status.class);
+                            Status status = statusList.stream().filter(x -> x.getNome().equals("Pendente")).findFirst().get();
+                            
+                            Produto newProduto = new Produto(produto.getIdProduto());
+                            JOptionPane.showMessageDialog(null, "User" + usuario.getIdUsuario());
+                            Usuario newUser = new Usuario(usuario.getIdUsuario());
+
+                            
+                            if(!salvouPedido){
+                                pedido = new Pedido(usuario, status, new Date(), usuario.getEndereco(), isRetirarNaLoja, 2.2);
+                                pedido = this.pedidoDAO.inserir(pedido);
+                                salvouPedido = true;
+                            }else{
+                                ProdutoPedido produtoPedido = new ProdutoPedido();
+                                produtoPedido.setPedido(pedido);
+                                produtoPedido.setProduto(newProduto);
+                                produtoPedido.setQtd(qtd);
+                                this.genDao.inserir(produtoPedido);
+                            }
                         }
                     }
-                }
+            }
         }
     }
    
    public boolean efetuarLogin(String email, String senha){
-       Usuario usuario = usuarioDAO.findByEmailAndSenha(email, senha);
+       usuario = usuarioDAO.findByEmailAndSenha(email, senha);
+       
        if(usuario != null){
            return true;
        }

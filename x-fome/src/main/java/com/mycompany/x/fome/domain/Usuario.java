@@ -95,6 +95,19 @@ public class Usuario implements Serializable {
         return cidade;
     }
 
+    public Usuario(int idUsuario, String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, List<Pedido> pedidos, String cpf) {
+        this.idUsuario = idUsuario;
+        this.nomeUsuario = nomeUsuario;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.isCliente = isCliente;
+        this.email = email;
+        this.senha = senha;
+        this.cidade = cidade;
+        this.pedidos = pedidos;
+        this.cpf = cpf;
+    }
+
     public Usuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, List<Pedido> pedidos, String cpf) {
         this.nomeUsuario = nomeUsuario;
         this.endereco = endereco;
@@ -105,6 +118,7 @@ public class Usuario implements Serializable {
         this.cidade = cidade;
         this.pedidos = pedidos;
         this.cpf = cpf;
+        this.pedidos = new ArrayList<>();
         
     }
 
@@ -127,6 +141,10 @@ public class Usuario implements Serializable {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public Usuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
     
 }

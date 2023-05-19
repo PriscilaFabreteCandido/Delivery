@@ -5,6 +5,7 @@
  */
 package com.mycompany.x.fome.domain;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import javax.persistence.Column;
@@ -78,7 +79,27 @@ public class Pedido implements Serializable  {
         this.taxa_entrega = taxa_entrega;
     }
 
-    
+    public Pedido(Usuario cliente, Status status, Date data, String endereco, boolean isRetirarNaLoja, double taxa_entrega) {
+        this.cliente = cliente;
+        this.status = status;
+        this.data = data;
+        this.endereco = endereco;
+        this.isRetirarNaLoja = isRetirarNaLoja;
+        this.taxa_entrega = taxa_entrega;
+    }
+
+    public Pedido(int idPedido, Usuario cliente, Status status, Date data, String endereco, boolean isRetirarNaLoja, List<ProdutoPedido> produtos, double taxa_entrega) {
+        this.idPedido = idPedido;
+        this.cliente = cliente;
+        this.status = status;
+        this.data = data;
+        this.endereco = endereco;
+        this.isRetirarNaLoja = isRetirarNaLoja;
+        this.produtos = produtos;
+        this.taxa_entrega = taxa_entrega;
+        this.produtos = new ArrayList<>();
+    }
+
     public void setCliente(Usuario cliente) {
         this.cliente = cliente;
     }
