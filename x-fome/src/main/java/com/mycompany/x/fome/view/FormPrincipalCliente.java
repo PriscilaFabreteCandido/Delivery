@@ -20,9 +20,9 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
      * Creates new form Home
      */
     private GerInterGrafica gerInterfaceGrafica = null;
-    public FormPrincipalCliente() {
+    public FormPrincipalCliente(GerInterGrafica gerInterfaceGrafica) {
         initComponents();
-        gerInterfaceGrafica = new GerInterGrafica();
+        gerInterfaceGrafica = gerInterfaceGrafica;
     }
 
     /**

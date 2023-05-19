@@ -42,16 +42,17 @@ public class GerInterGrafica {
     private DlgUsuario dlgUsuario = null;
     private DlgLoja dlgLoja = null;
     private DlgVisualizarPedidos dlgVisualizarPedidos = null;
-    private GerenciadorDominio gerDominio = new GerenciadorDominio();
+    GerenciadorDominio gerDominio;
     
     public GerInterGrafica() {
+        gerDominio = new GerenciadorDominio();
         ConexaoHibernate.getSessionFactory();
     }
     
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
         if (dlg == null){     
             try {
-                dlg = (JDialog) classe.getConstructor(Frame.class, boolean.class, GerInterGrafica.class ).newInstance(parent,true,this);
+                dlg = (JDialog) classe.getConstructor(Frame.class, boolean.class, GerInterGrafica.class ).newInstance(parent,true, this);
             } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 JOptionPane.showMessageDialog(parent, "Erro ao abrir a janela " + classe.getName() );
             } 
@@ -65,7 +66,7 @@ public class GerInterGrafica {
     }
     
     public void openJanelaPrincipalCliente(){
-        principalCliente = new FormPrincipalCliente();
+        principalCliente = new FormPrincipalCliente(this);
         principalCliente.setVisible(true);
     }
     

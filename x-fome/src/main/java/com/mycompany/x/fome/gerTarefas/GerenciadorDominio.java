@@ -46,6 +46,7 @@ public class GerenciadorDominio {
             produtoDAO = new ProdutoDAO();
             usuarioDAO = new UsuarioDAO();
             pedidoDAO = new PedidoDAO();
+             JOptionPane.showMessageDialog(null, "Deu erro instairdmlkdkddk");   
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Deu erro" + ex.getMessage() );          
         }
@@ -73,6 +74,7 @@ public class GerenciadorDominio {
     
     //Pedido
    public void efetuarPedido(Vector pedidos, boolean isRetirarNaLoja) {
+       System.out.println(usuario);
        boolean salvouPedido = false;
        Pedido pedido = null;
        List<Produto> produtoList = new ArrayList<>();
@@ -111,7 +113,7 @@ public class GerenciadorDominio {
     }
    
    public boolean efetuarLogin(String email, String senha){
-       usuario = usuarioDAO.findByEmailAndSenha(email, senha);
+       this.usuario = usuarioDAO.findByEmailAndSenha(email, senha);
        
        if(usuario != null){
            return true;
