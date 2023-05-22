@@ -22,7 +22,8 @@ public class FormPrincipalCliente extends javax.swing.JFrame {
     private GerInterGrafica gerInterfaceGrafica = null;
     public FormPrincipalCliente(GerInterGrafica gerInterfaceGrafica) {
         initComponents();
-        gerInterfaceGrafica = gerInterfaceGrafica;
+        this.gerInterfaceGrafica = gerInterfaceGrafica;
+        
     }
 
     /**

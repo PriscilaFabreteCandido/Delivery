@@ -95,7 +95,7 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return nomeProduto + " , ingredientes: " + ingredientes + ",  R$ " + preco;
+        return nomeProduto;
     }
      public Object[] toArray() throws ParseException {
         return new Object[] { this};

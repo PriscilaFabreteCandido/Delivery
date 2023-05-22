@@ -6,7 +6,9 @@
 package com.mycompany.x.fome.dao;
 
 import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Pedido;
 import com.mycompany.x.fome.domain.Produto;
+import com.mycompany.x.fome.domain.ProdutoPedido;
 import com.mycompany.x.fome.domain.Usuario;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -57,5 +59,42 @@ public class UsuarioDAO {
         return usuarioEncontrado;
     }
 
-    
+    public Usuario getById(Usuario user, boolean lazy) throws HibernateException {        
+        Session sessao = null;
+        Usuario usuarioEncontrado = null;
+        
+        try {
+            sessao = ConexaoHibernate.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            CriteriaBuilder builder = sessao.getCriteriaBuilder();
+            CriteriaQuery<Usuario> consulta = builder.createQuery(Usuario.class);
+            Root<Usuario> root = consulta.from(Usuario.class);
+
+            Predicate condicao = builder.and(
+                builder.equal(root.get("idUsuario"), user.getIdUsuario())
+            );
+
+            consulta.select(root).where(condicao);
+
+            usuarioEncontrado = sessao.createQuery(consulta).uniqueResult();
+            if(usuarioEncontrado != null && !lazy && usuarioEncontrado.getPedidos() != null){
+                for(Pedido pedido: usuarioEncontrado.getPedidos() ){
+                    pedido.getStatus();
+                    for(ProdutoPedido item: pedido.getProdutos()){
+                        item.getProduto();
+                    }
+                }
+            }
+            
+        } catch( HibernateException erro) {
+            if ( sessao != null ){
+                sessao.getTransaction().rollback();
+                sessao.close();
+            }
+            throw new HibernateException(erro);
+        }
+        
+        return usuarioEncontrado;
+    }
 }

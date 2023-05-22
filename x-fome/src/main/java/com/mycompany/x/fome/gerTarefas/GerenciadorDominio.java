@@ -45,8 +45,7 @@ public class GerenciadorDominio {
             genDao = new GenericDAO();
             produtoDAO = new ProdutoDAO();
             usuarioDAO = new UsuarioDAO();
-            pedidoDAO = new PedidoDAO();
-             JOptionPane.showMessageDialog(null, "Deu erro instairdmlkdkddk");   
+            pedidoDAO = new PedidoDAO();  
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Deu erro" + ex.getMessage() );          
         }
@@ -90,27 +89,30 @@ public class GerenciadorDominio {
                             List<Status> statusList = genDao.listar(Status.class);
                             Status status = statusList.stream().filter(x -> x.getNome().equals("Pendente")).findFirst().get();
                             
-                            Produto newProduto = new Produto(produto.getIdProduto());
-                            JOptionPane.showMessageDialog(null, "User" + usuario.getIdUsuario());
-                            Usuario newUser = new Usuario(usuario.getIdUsuario());
-
-                            
                             if(!salvouPedido){
                                 pedido = new Pedido(usuario, status, new Date(), usuario.getEndereco(), isRetirarNaLoja, 2.2);
                                 pedido = this.pedidoDAO.inserir(pedido);
                                 salvouPedido = true;
+                                this.genDao.inserir(this.createProdutoPedido(pedido, produto, qtd));
                             }else{
-                                ProdutoPedido produtoPedido = new ProdutoPedido();
-                                produtoPedido.setPedido(pedido);
-                                produtoPedido.setProduto(newProduto);
-                                produtoPedido.setQtd(qtd);
-                                this.genDao.inserir(produtoPedido);
+                                this.genDao.inserir(this.createProdutoPedido(pedido, produto, qtd));
                             }
                         }
                     }
             }
         }
+        
+        JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!!");  
     }
+   
+   public ProdutoPedido createProdutoPedido(Pedido pedido, Produto produto, int qtd){
+        ProdutoPedido produtoPedido = new ProdutoPedido();
+        produtoPedido.setPedido(pedido);
+        produtoPedido.setProduto(produto);
+        produtoPedido.setPreco(produto.getPreco());
+        produtoPedido.setQtd(qtd);
+        return produtoPedido;
+   }
    
    public boolean efetuarLogin(String email, String senha){
        this.usuario = usuarioDAO.findByEmailAndSenha(email, senha);
@@ -119,5 +121,10 @@ public class GerenciadorDominio {
            return true;
        }
        return false;
+   }
+   
+   public Usuario getAllPedidosByUser(){
+       this.usuario = usuarioDAO.getById(usuario, true);
+       return usuario;
    }
 }

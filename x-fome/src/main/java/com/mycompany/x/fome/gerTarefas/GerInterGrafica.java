@@ -7,7 +7,9 @@ package com.mycompany.x.fome.gerTarefas;
 
 import com.mycompany.x.fome.dao.ConexaoHibernate;
 import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Pedido;
 import com.mycompany.x.fome.domain.Produto;
+import com.mycompany.x.fome.domain.ProdutoPedido;
 import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
@@ -17,6 +19,7 @@ import com.mycompany.x.fome.view.FormPrincipalCliente;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -24,6 +27,8 @@ import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 
@@ -117,7 +122,36 @@ public class GerInterGrafica {
          } 
 
     }
-   
+    
+    public void loadTableVisualizarPedidos(JTable tabela){
+        DefaultTableModel tableModel = (DefaultTableModel) tabela.getModel();
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tabela.setDefaultRenderer(Object.class, centerRenderer);
+        Usuario usuario = this.gerDominio.getAllPedidosByUser();
+
+        if(!usuario.getPedidos().isEmpty() && usuario.getPedidos().size() > 0 ){
+           
+            Double total = 0.0;
+            for(Pedido pedido : usuario.getPedidos()){
+                StringBuilder produtos = new StringBuilder();
+                String status = pedido.getStatus().getNome();
+                for(ProdutoPedido produto: pedido.getProdutos()){
+                    for(ProdutoPedido item: pedido.getProdutos()){
+                        total += item.getPreco() * item.getQtd();
+                        produtos.append(item.getProduto().getNomeProduto() + " - " );
+                    }
+                }
+                
+                Object[] rowData = {produtos.toString(), status, total};
+                
+                tableModel.addRow(rowData);
+            }   
+        }
+        
+        tabela.setShowVerticalLines(false);
+    }
     public static void main(String[] args) {
         GerInterGrafica g = new GerInterGrafica();
         g.openJanelaLogin();

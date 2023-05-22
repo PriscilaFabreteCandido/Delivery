@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.view;
 
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +17,14 @@ public class DlgVisualizarPedidos extends javax.swing.JDialog {
     /**
      * Creates new form DlgVisualizarPedidos
      */
+    private GerInterGrafica gerIG = null;
+    private boolean carregouTudo = false;
     public DlgVisualizarPedidos(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG) {
         super(parent, modal);
         initComponents();
+        this.gerIG = gerIG;
+        carregouTudo = true;
+        this.gerIG.loadTableVisualizarPedidos(table);
     }
 
     /**
@@ -32,24 +38,31 @@ public class DlgVisualizarPedidos extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Meus Pedidos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Produtos", "Status", "Preço Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        table.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                carregarTable(evt);
+            }
+        });
+        table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tablePropertyChange(evt);
+            }
+        });
+        jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,25 +71,39 @@ public class DlgVisualizarPedidos extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(357, 357, 357)
+                        .addComponent(jLabel1)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void carregarTable(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_carregarTable
+        JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!!");  
+        if(this.gerIG != null && this.carregouTudo){
+            this.gerIG.loadTableVisualizarPedidos(table);
+        }
+    }//GEN-LAST:event_carregarTable
+
+    private void tablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tablePropertyChange
+        JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!!");  
+        if(this.gerIG != null && this.carregouTudo){
+            this.gerIG.loadTableVisualizarPedidos(table);
+        }
+    }//GEN-LAST:event_tablePropertyChange
 
     /**
      * @param args the command line arguments
@@ -86,6 +113,6 @@ public class DlgVisualizarPedidos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

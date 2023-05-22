@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.view;
 
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,11 +39,11 @@ public class DlgLogin extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        senha = new javax.swing.JTextField();
         realizarLogin = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cadastrar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,6 +60,11 @@ public class DlgLogin extends javax.swing.JDialog {
         realizarLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 realizarLoginActionPerformed(evt);
+            }
+        });
+        realizarLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                realizarLoginKeyPressed(evt);
             }
         });
 
@@ -121,8 +127,8 @@ public class DlgLogin extends javax.swing.JDialog {
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(realizarLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
@@ -141,13 +147,23 @@ public class DlgLogin extends javax.swing.JDialog {
 
     private void realizarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarLoginActionPerformed
         this.setVisible(false);
-        if(gerIG.getGerDominio().efetuarLogin(email.getText(), senha.getText())){
+        if(gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword()))){
             gerIG.openJanelaPrincipalCliente();
         }else{
             JOptionPane.showMessageDialog(null, "Usuário ou senha inválida");
         }
         
     }//GEN-LAST:event_realizarLoginActionPerformed
+
+    private void realizarLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_realizarLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if(gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword()))){
+                gerIG.openJanelaPrincipalCliente();
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuário ou senha inválida");
+            }
+        }
+    }//GEN-LAST:event_realizarLoginKeyPressed
 
     /**
      * @param args the command line arguments
@@ -163,6 +179,6 @@ public class DlgLogin extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton realizarLogin;
-    private javax.swing.JTextField senha;
+    private javax.swing.JPasswordField senha;
     // End of variables declaration//GEN-END:variables
 }
