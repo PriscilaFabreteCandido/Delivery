@@ -154,12 +154,11 @@ public class GerInterGrafica {
         
         tabela.setShowVerticalLines(false);
     }
+    
     public static void main(String[] args) {
         GerInterGrafica g = new GerInterGrafica();
         g.openJanelaLogin();
     }
-    
-    
-    
+
     
 }

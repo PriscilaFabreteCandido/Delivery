@@ -262,14 +262,15 @@ public class DlgLoja extends javax.swing.JDialog {
        
     }//GEN-LAST:event_excluirActionPerformed
     private void limparTudo(){
-        initComponents();
-        this.loadCombobox();
+        DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        tableModel.setRowCount(0);
     }
     
     private void realizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarPedidoActionPerformed
         DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
         this.gerIG.getGerDominio().efetuarPedido(tableModel.getDataVector(), false);
-//        this.limparTudo();
+        this.limparTudo();
     }//GEN-LAST:event_realizarPedidoActionPerformed
     
     public void loadTableLoja(JTable tabela) {

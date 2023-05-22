@@ -1,3 +1,4 @@
+CREATE SCHEMA `x-fome` ;
 insert into `x-fome`.categoria(nome) values ('Sobremesa'), ('Porções'), ('Hamburguers');
 insert into `x-fome`.produto(ingredientes, nomeProduto, preco, idCategoria) 
 values ('Pão, Bifé, Bacon', 'X-Bacon', 15, 3), 
