@@ -108,17 +108,21 @@ public class GerInterGrafica {
 
     }
    
-    public void carregarListaProdutosPorCategoria(JList produtos, Categoria categoria){
+    public void carregarListaProdutosPorCategoria(JTable tabela, Categoria categoria){
         try {
-             List<Produto> lista = gerDominio.findProdutosByCategoria(categoria);
-             try{
-                 produtos.setModel( new DefaultComboBoxModel( lista.toArray() ));
-             }catch(Exception  ex){
-                 JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );  
-             }
+            List<Produto> lista = getGerDominio().findProdutosByCategoria(categoria);
+            DefaultTableModel tableModel = (DefaultTableModel) tabela.getModel();
+            DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+            tableModel.setRowCount(0);
 
+            for(Produto produto : lista){
+                Object[] rowData = {produto, produto.getIngredientes(), produto.getPreco()};
+                tableModel.addRow(rowData);
+            }
+            
+            tabela.setShowVerticalLines(false);
          } catch (HibernateException  ex) {
-             JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );          
+             JOptionPane.showMessageDialog(principalCliente, "Erro " + ex.getMessage() );          
          } 
 
     }
@@ -142,8 +146,8 @@ public class GerInterGrafica {
                 for(ProdutoPedido produto: pedido.getProdutos()){
                     for(ProdutoPedido item: pedido.getProdutos()){
                         total += item.getPreco() * item.getQtd();
-                        produtos.append(item.getProduto().getNomeProduto() + " - " );
                     }
+                    produtos.append(produto.getProduto().getNomeProduto() + " - " );
                 }
                 
                 Object[] rowData = {produtos.toString(), status, total};

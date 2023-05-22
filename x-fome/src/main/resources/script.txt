@@ -6,6 +6,6 @@ values ('Pão, Bifé, Bacon', 'X-Bacon', 15, 3),
        ('Fritas, Alcatra, Alface', 'Alcatra', 70, 2),
        ('Fritas, Peixe, Alface', 'Peixe', 70, 2),
        ('Leite em pó, Açaí, Leite Condesado', 'Açaí 500ml', 15, 1),
-       ('Leite em pó, Açaí, Leite Condesado', 'Açaí 1LS', 15, 1);
+       ('Leite em pó, Açaí, Leite Condesado', 'Açaí 1L', 15, 1);
 
 insert into `x-fome`.status(nome) values ('Pendente'), ('Aceito'), ('Retirada na loja'), ('Pedido rejeitado'), ('Entregue'), ('A caminho'), ('Em processamento');
