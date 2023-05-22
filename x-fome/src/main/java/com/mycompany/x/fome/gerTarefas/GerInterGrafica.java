@@ -129,6 +129,7 @@ public class GerInterGrafica {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         tabela.setDefaultRenderer(Object.class, centerRenderer);
+        
         Usuario usuario = this.gerDominio.getAllPedidosByUser();
 
         if(!usuario.getPedidos().isEmpty() && usuario.getPedidos().size() > 0 ){
