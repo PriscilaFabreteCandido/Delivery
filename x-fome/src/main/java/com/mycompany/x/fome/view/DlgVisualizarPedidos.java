@@ -92,14 +92,14 @@ public class DlgVisualizarPedidos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void carregarTable(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_carregarTable
-        JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!!");  
+ 
         if(this.gerIG != null && this.carregouTudo){
             this.gerIG.loadTableVisualizarPedidos(table);
         }
     }//GEN-LAST:event_carregarTable
 
     private void tablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tablePropertyChange
-        JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!!");  
+
         if(this.gerIG != null && this.carregouTudo){
             this.gerIG.loadTableVisualizarPedidos(table);
         }
