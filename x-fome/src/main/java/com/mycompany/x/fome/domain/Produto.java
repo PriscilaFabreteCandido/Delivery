@@ -105,7 +105,8 @@ public class Produto implements Serializable {
     public String toString() {
         return nomeProduto;
     }
-     public Object[] toArray() throws ParseException {
+    
+    public Object[] toArray() throws ParseException {
         return new Object[] { this};
     }
 }

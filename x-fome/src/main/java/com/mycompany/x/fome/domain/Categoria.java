@@ -59,4 +59,7 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
+    public Object[] toArray() throws ParseException {
+        return new Object[] { this};
+    }
 }

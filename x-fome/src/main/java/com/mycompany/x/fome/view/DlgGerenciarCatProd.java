@@ -5,7 +5,17 @@
  */
 package com.mycompany.x.fome.view;
 
+import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Pedido;
+import com.mycompany.x.fome.domain.ProdutoPedido;
+import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+import java.text.ParseException;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,7 +32,25 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
         initComponents();
         this.gerIG = gerIG;
     }
-
+    
+    public void loadTable(JTable tabela) throws ParseException{
+        DefaultTableModel tableModel = (DefaultTableModel) tabela.getModel();
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tabela.setDefaultRenderer(Object.class, centerRenderer);
+        tableModel.setRowCount(0);
+        
+        List<Categoria> lista = this.gerIG.getGerDominio().getAllCategoria();
+        
+        if(!lista.isEmpty()){
+            for(Categoria cat: lista){
+                tableModel.addRow(cat.toArray());
+            }
+        }
+        
+        tabela.setShowVerticalLines(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
