@@ -58,7 +58,8 @@ public class UsuarioDAO {
 
         return usuarioEncontrado;
     }
-
+   
+   @Tr
     public Usuario getById(Usuario user, boolean lazy) throws HibernateException {        
         Session sessao = null;
         Usuario usuarioEncontrado = null;
@@ -79,7 +80,7 @@ public class UsuarioDAO {
 
             usuarioEncontrado = sessao.createQuery(consulta).uniqueResult();
             if(usuarioEncontrado != null && !lazy && usuarioEncontrado.getPedidos() != null){
-                for(Pedido pedido: usuarioEncontrado.getPedidos() ){
+                for(Pedido pedido: usuarioEncontrado.getPedidos()){
                     pedido.getStatus();
                     for(ProdutoPedido item: pedido.getProdutos()){
                         item.getProduto();

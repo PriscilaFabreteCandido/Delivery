@@ -50,8 +50,8 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuCadProd = new javax.swing.JMenu();
+        menuGerProd = new javax.swing.JMenu();
 
         jLabel2.setText("jLabel2");
 
@@ -114,11 +114,21 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
 
         jButton3.setText("Cancelar Pedido");
 
-        jMenu1.setText("Cadastrar Produto");
-        jMenuBar1.add(jMenu1);
+        menuCadProd.setText("Cadastrar Produto");
+        menuCadProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadProdActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuCadProd);
 
-        jMenu2.setText("Gerenciar Produtos");
-        jMenuBar1.add(jMenu2);
+        menuGerProd.setText("Gerenciar Produtos");
+        menuGerProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGerProdActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuGerProd);
 
         setJMenuBar(jMenuBar1);
 
@@ -204,6 +214,14 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void menuCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadProdActionPerformed
+        this.gerG.openJanelaCadastrarProduto();
+    }//GEN-LAST:event_menuCadProdActionPerformed
+
+    private void menuGerProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerProdActionPerformed
+         this.gerG.openJanelaGerenciarProdutos();
+    }//GEN-LAST:event_menuGerProdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,8 +238,6 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
@@ -231,5 +247,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JMenu menuCadProd;
+    private javax.swing.JMenu menuGerProd;
     // End of variables declaration//GEN-END:variables
 }
