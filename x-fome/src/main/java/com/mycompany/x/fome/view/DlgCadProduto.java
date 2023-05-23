@@ -87,7 +87,8 @@ public class DlgCadProduto extends javax.swing.JDialog {
 
         jLabel1.setText("Nome: ");
 
-        cadastrarCatProd.setText("Cadastrar");
+        cadastrarCatProd.setBackground(new java.awt.Color(204, 255, 204));
+        cadastrarCatProd.setText("Enviar");
         cadastrarCatProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrarCatProdActionPerformed(evt);
@@ -102,12 +103,12 @@ public class DlgCadProduto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(nomeCat)
+                .addComponent(nomeCat, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
+                .addGap(144, 144, 144)
                 .addComponent(cadastrarCatProd)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +134,8 @@ public class DlgCadProduto extends javax.swing.JDialog {
 
         jLabel7.setText("Ingredientes: ");
 
-        cadastrarProduto.setText("Cadastrar");
+        cadastrarProduto.setBackground(new java.awt.Color(204, 255, 204));
+        cadastrarProduto.setText("Enviar");
         cadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrarProdutoActionPerformed(evt);
@@ -167,10 +169,10 @@ public class DlgCadProduto extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ingredientes)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(149, 149, 149)
                 .addComponent(cadastrarProduto)
-                .addGap(138, 138, 138))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,9 +193,9 @@ public class DlgCadProduto extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(ingredientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cadastrarProduto)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,14 +224,18 @@ public class DlgCadProduto extends javax.swing.JDialog {
 
     private void cadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProdutoActionPerformed
         Categoria cat = (Categoria) this.categoriaCombobox.getSelectedItem();
-        if(this.validarCamposProduto()){
+        if(this.validarCamposProduto() && produto == null){
             this.gerIG.getGerDominio().createProduto(cat, nomeProduto.getText(), ingredientes.getText(), Double.parseDouble(preco.getValue().toString()));
+        }else{
+            //editar produto
         }
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
 
     private void cadastrarCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCatProdActionPerformed
-        if(this.validarCamposCat()){
+        if(this.validarCamposCat() && categoria == null){
             this.gerIG.getGerDominio().createCategoria(nomeCat.getText());
+        }else{
+            //editar categoria
         }
     }//GEN-LAST:event_cadastrarCatProdActionPerformed
 

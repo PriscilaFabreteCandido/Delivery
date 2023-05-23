@@ -34,7 +34,7 @@ public class DlgGerenciarProdutos extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -42,7 +42,7 @@ public class DlgGerenciarProdutos extends javax.swing.JDialog {
 
         jLabel1.setText("Gerenciar Produto");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +53,7 @@ public class DlgGerenciarProdutos extends javax.swing.JDialog {
                 "Nome", "Categoria", "Ingredientes", "Preço"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table);
 
         jButton1.setBackground(new java.awt.Color(255, 204, 204));
         jButton1.setText("Excluir ");
@@ -109,6 +109,6 @@ public class DlgGerenciarProdutos extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
