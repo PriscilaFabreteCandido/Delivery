@@ -8,6 +8,9 @@ package com.mycompany.x.fome.view;
 import com.mycompany.x.fome.domain.Categoria;
 import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
@@ -80,11 +83,16 @@ public class DlgCadProduto extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar  Categoria de Produto"));
 
         jLabel1.setText("Nome: ");
 
         cadastrarCatProd.setText("Cadastrar");
+        cadastrarCatProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarCatProdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,7 +121,7 @@ public class DlgCadProduto extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar Produto"));
 
         jLabel3.setText("Categoria: ");
 
@@ -126,6 +134,11 @@ public class DlgCadProduto extends javax.swing.JDialog {
         jLabel7.setText("Ingredientes: ");
 
         cadastrarProduto.setText("Cadastrar");
+        cadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -207,6 +220,47 @@ public class DlgCadProduto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProdutoActionPerformed
+        Categoria cat = (Categoria) this.categoriaCombobox.getSelectedItem();
+        if(this.validarCamposProduto()){
+            this.gerIG.getGerDominio().createProduto(cat, nomeProduto.getText(), ingredientes.getText(), Double.parseDouble(preco.getValue().toString()));
+        }
+    }//GEN-LAST:event_cadastrarProdutoActionPerformed
+
+    private void cadastrarCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCatProdActionPerformed
+        if(this.validarCamposCat()){
+            this.gerIG.getGerDominio().createCategoria(nomeCat.getText());
+        }
+    }//GEN-LAST:event_cadastrarCatProdActionPerformed
+
+    private boolean validarCamposProduto(){
+        Double valor = Double.parseDouble(preco.getValue().toString());
+        if (valor <= 0) {
+            JOptionPane.showMessageDialog(null, "Preço inválido. Digite um valor numérico válido.");
+            return false;
+        }
+        
+        if (ingredientes.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo de ingredientes vazio. Preencha o campo.");
+            return false;
+        }
+        
+        if (nomeProduto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo de nome do produto vazio. Preencha o campo.");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean validarCamposCat(){
+
+        if (nomeCat.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo de ingredientes vazio. Preencha o campo.");
+            return false;
+        }
+
+        return true;
+    }
     /**
      * @param args the command line arguments
      */

@@ -38,6 +38,10 @@ public class Categoria implements Serializable {
         return idCategoria;
     }
 
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
+
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }

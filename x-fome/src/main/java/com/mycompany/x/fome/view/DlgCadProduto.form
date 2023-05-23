@@ -111,6 +111,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarCatProdActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -240,6 +243,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarProdutoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

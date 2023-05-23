@@ -127,4 +127,13 @@ public class GerenciadorDominio {
        this.usuario = usuarioDAO.getById(usuario, true);
        return usuario;
    }
+   
+   public void createCategoria(String nome){
+       Categoria cat = new Categoria(nome);
+       this.genDao.inserir(cat);
+   }
+   
+   public void createProduto(Categoria cat, String nome, String ingredientes, Double preco){
+       Produto prod = new Produto(cat, nome, ingredientes, preco);
+   }
 }
