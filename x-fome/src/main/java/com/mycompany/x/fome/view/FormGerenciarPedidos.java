@@ -45,6 +45,9 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         jLabel2.setText("jLabel2");
 
@@ -106,6 +109,14 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jButton2.setText("Editar Pedido");
 
         jButton3.setText("Cancelar Pedido");
+
+        jMenu1.setText("Cadastrar Produto");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Gerenciar Produtos");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,6 +216,9 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
