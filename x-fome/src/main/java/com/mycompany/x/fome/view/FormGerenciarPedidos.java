@@ -5,6 +5,8 @@
  */
 package com.mycompany.x.fome.view;
 
+import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
+
 /**
  *
  * @author 2021122760232
@@ -14,8 +16,10 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     /**
      * Creates new form FrameGerenciarPedidos
      */
-    public FormGerenciarPedidos() {
+    private GerInterGrafica gerG = null;
+    public FormGerenciarPedidos(GerInterGrafica gerG) {
         initComponents();
+        this.gerG = gerG;
     }
 
     /**

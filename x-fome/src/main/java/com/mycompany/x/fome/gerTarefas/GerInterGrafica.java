@@ -15,6 +15,7 @@ import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
 import com.mycompany.x.fome.view.DlgUsuario;
 import com.mycompany.x.fome.view.DlgVisualizarPedidos;
+import com.mycompany.x.fome.view.FormGerenciarPedidos;
 import com.mycompany.x.fome.view.FormPrincipalCliente;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
@@ -47,6 +48,7 @@ public class GerInterGrafica {
     private DlgUsuario dlgUsuario = null;
     private DlgLoja dlgLoja = null;
     private DlgVisualizarPedidos dlgVisualizarPedidos = null;
+    private FormGerenciarPedidos gerenciarPedidos = null;
     GerenciadorDominio gerDominio;
     
     public GerInterGrafica() {
@@ -75,6 +77,11 @@ public class GerInterGrafica {
         principalCliente.setVisible(true);
     }
     
+     public void openJanelaGerenciarPedidos(){
+        gerenciarPedidos = new FormGerenciarPedidos(this);
+        gerenciarPedidos.setVisible(true);
+    }
+    
     public void openJanelaUsuario(){
         dlgUsuario = (DlgUsuario) abrirJanela(null, dlgUsuario, DlgUsuario.class);
     }
@@ -92,9 +99,6 @@ public class GerInterGrafica {
         dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(principalCliente, dlgVisualizarPedidos, DlgVisualizarPedidos.class);
     }
    
-    public void createUsuario(Usuario usuario){
-        
-    }
     
     public void carregarComboCategoria(JComboBox combo, Class classe) {
 

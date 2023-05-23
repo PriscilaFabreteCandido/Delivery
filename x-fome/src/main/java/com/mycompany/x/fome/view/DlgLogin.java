@@ -5,6 +5,7 @@
  */
 package com.mycompany.x.fome.view;
 
+import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -20,7 +21,6 @@ public class DlgLogin extends javax.swing.JDialog {
      */
     
     private GerInterGrafica gerIG = null;
-   
     public DlgLogin(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
         initComponents();
@@ -147,8 +147,14 @@ public class DlgLogin extends javax.swing.JDialog {
 
     private void realizarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarLoginActionPerformed
         this.setVisible(false);
-        if(gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword()))){
-            gerIG.openJanelaPrincipalCliente();
+        if(gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword())) != null){
+            Usuario user = gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword())) ;
+            if(user.isIsCliente()){
+                gerIG.openJanelaPrincipalCliente();   
+            }else{
+                gerIG.openJanelaGerenciarPedidos();
+            }
+            
         }else{
             JOptionPane.showMessageDialog(null, "Usuário ou senha inválida");
         }
@@ -156,13 +162,13 @@ public class DlgLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_realizarLoginActionPerformed
 
     private void realizarLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_realizarLoginKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword()))){
-                gerIG.openJanelaPrincipalCliente();
-            }else{
-                JOptionPane.showMessageDialog(null, "Usuário ou senha inválida");
-            }
-        }
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+//            if(gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword()))){
+//                gerIG.openJanelaPrincipalCliente();
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Usuário ou senha inválida");
+//            }
+//        }
     }//GEN-LAST:event_realizarLoginKeyPressed
 
     /**

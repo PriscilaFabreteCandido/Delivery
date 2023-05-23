@@ -114,13 +114,13 @@ public class GerenciadorDominio {
         return produtoPedido;
    }
    
-   public boolean efetuarLogin(String email, String senha){
+   public Usuario efetuarLogin(String email, String senha){
        this.usuario = usuarioDAO.findByEmailAndSenha(email, senha);
        
        if(usuario != null){
-           return true;
+           return this.usuario;
        }
-       return false;
+       return null;
    }
    
    public Usuario getAllPedidosByUser(){
