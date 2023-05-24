@@ -5,6 +5,7 @@
  */
 package com.mycompany.x.fome.view;
 
+import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
 
 /**
@@ -20,6 +21,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     public FormGerenciarPedidos(GerInterGrafica gerG) {
         initComponents();
         this.gerG = gerG;
+        this.gerG.carregarComboBox(statusCombobox, Status.class);
     }
 
     /**
@@ -37,7 +39,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        statusCombobox = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -77,7 +79,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
 
         jLabel3.setText("Status: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        statusCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setText("Endereco");
 
@@ -170,7 +172,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(statusCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -208,7 +210,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(statusCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
@@ -271,7 +273,6 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -290,5 +291,6 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private javax.swing.JMenu menuCadProd;
     private javax.swing.JMenu menuGerCatProd;
     private javax.swing.JMenu menuGerProd;
+    private javax.swing.JComboBox<String> statusCombobox;
     // End of variables declaration//GEN-END:variables
 }

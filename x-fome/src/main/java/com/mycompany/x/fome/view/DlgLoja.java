@@ -274,7 +274,6 @@ public class DlgLoja extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
         }
 
-        qtd.setValue(getTotal());
        
     }//GEN-LAST:event_excluirActionPerformed
     private void limparTudo(){
@@ -349,7 +348,7 @@ public class DlgLoja extends javax.swing.JDialog {
                     if (item.size() >= 2) {
                             Produto produto = (Produto) item.get(0);
                             Integer qtd = (Integer) item.get(1);
-                            total += produto.getPreco() * qtd;
+                            total += produto.getPreco() * qtd.doubleValue();
                         }
                     }
             }

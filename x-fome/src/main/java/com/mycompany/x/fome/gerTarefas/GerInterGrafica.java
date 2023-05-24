@@ -128,6 +128,18 @@ public class GerInterGrafica {
          } 
 
     }
+    
+    public void carregarComboBox(JComboBox combo, Class classe) {
+
+         try {
+            
+             combo.setModel( new DefaultComboBoxModel( gerDominio.listar(classe).toArray() ));
+
+         } catch (HibernateException  ex) {
+             JOptionPane.showMessageDialog(principalCliente, "Erro ao carregar cidades. " + ex.getMessage() );          
+         } 
+
+    }
    
     public void carregarListaProdutosPorCategoria(JTable tabela, Categoria categoria){
         try {

@@ -6,6 +6,7 @@
 package com.mycompany.x.fome.domain;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,5 +50,12 @@ public class Status implements Serializable{
         this.nome = nome;
     }
 
-    
+    @Override
+    public String toString() {
+        return  nome;
+    }
+
+    public Object[] toArray() throws ParseException {
+        return new Object[] { this};
+    }
 }

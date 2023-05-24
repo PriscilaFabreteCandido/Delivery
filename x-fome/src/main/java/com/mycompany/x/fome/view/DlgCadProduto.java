@@ -227,6 +227,7 @@ public class DlgCadProduto extends javax.swing.JDialog {
         if(this.validarCamposProduto() && produto == null){
             this.gerIG.getGerDominio().createProduto(cat, nomeProduto.getText(), ingredientes.getText(), Double.parseDouble(preco.getValue().toString()));
             JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
+            this.limparCamposProd();
         }else{
             //editar produto
         }
@@ -237,7 +238,7 @@ public class DlgCadProduto extends javax.swing.JDialog {
             this.gerIG.getGerDominio().createCategoria(nomeCat.getText());
             JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
             this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
-            
+            this.nomeCat.setText("");
         }else{
             //editar categoria
         }
@@ -270,6 +271,12 @@ public class DlgCadProduto extends javax.swing.JDialog {
         }
 
         return true;
+    }
+    
+    private void limparCamposProd(){
+        nomeProduto.setText("");
+        preco.setValue(0);
+        ingredientes.setText("");
     }
     /**
      * @param args the command line arguments
