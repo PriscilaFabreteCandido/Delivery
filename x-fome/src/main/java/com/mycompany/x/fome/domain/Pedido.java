@@ -50,6 +50,14 @@ public class Pedido implements Serializable  {
     
     @Column (name="isRetirarNaLoja",nullable = false)
     private boolean isRetirarNaLoja;
+
+    public boolean isIsRetirarNaLoja() {
+        return isRetirarNaLoja;
+    }
+
+    public void setIsRetirarNaLoja(boolean isRetirarNaLoja) {
+        this.isRetirarNaLoja = isRetirarNaLoja;
+    }
     
     @OneToMany ( mappedBy = "pedido", fetch =  FetchType.LAZY)
     private List<ProdutoPedido> produtos;

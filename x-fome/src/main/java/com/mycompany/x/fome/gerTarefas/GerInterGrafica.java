@@ -164,11 +164,15 @@ public class GerInterGrafica {
             for(Pedido pedido : usuario.getPedidos()){
                 StringBuilder produtos = new StringBuilder();
                 String status = pedido.getStatus().getNome();
-                for(ProdutoPedido produto: pedido.getProdutos()){
-                    for(ProdutoPedido item: pedido.getProdutos()){
-                        total += item.getPreco() * item.getQtd();
-                    }
-                    produtos.append(produto.getProduto().getNomeProduto() + " - " );
+                total = 0.0;
+                if(!pedido.isIsRetirarNaLoja()){
+                    total = 2.0;
+                }
+                for(ProdutoPedido item: pedido.getProdutos()){
+                    
+                    total += item.getPreco() * item.getQtd();
+                    int qtd = item.getQtd();
+                    produtos.append(qtd + " - " + item.getProduto().getNomeProduto() + "; " );
                 }
                 
                 Object[] rowData = {produtos.toString(), status, total};
