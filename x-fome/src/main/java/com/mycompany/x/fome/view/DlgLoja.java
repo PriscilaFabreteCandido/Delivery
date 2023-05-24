@@ -294,13 +294,11 @@ public class DlgLoja extends javax.swing.JDialog {
     }//GEN-LAST:event_SimNaoComboPropertyChange
 
     private void SimNaoComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimNaoComboActionPerformed
-        if(this.SimNaoCombo.getSelectedItem().toString().equals("Sim") && simNaoString.equals("Não")){
-           JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+        if(this.SimNaoCombo.getSelectedItem().toString().equals("Sim")){
            simNaoString = "Sim";
            this.total.setText(getTotal().toString());
         }
-        else if(simNaoString.equals("Não") && this.SimNaoCombo.getSelectedItem().toString().equals("Não")){
-            JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+        else if(simNaoString.equals("Não")){
            simNaoString = "Não";
            this.total.setText(getTotal().toString());
         }
