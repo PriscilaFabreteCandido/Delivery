@@ -135,6 +135,7 @@ public class GerenciadorDominio {
    
    public void createProduto(Categoria cat, String nome, String ingredientes, Double preco){
        Produto prod = new Produto(cat, nome, ingredientes, preco);
+       this.genDao.inserir(prod);
    }
    
    public List<Categoria> getAllCategoria(){

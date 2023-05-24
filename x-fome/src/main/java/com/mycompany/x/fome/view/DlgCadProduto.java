@@ -226,6 +226,7 @@ public class DlgCadProduto extends javax.swing.JDialog {
         Categoria cat = (Categoria) this.categoriaCombobox.getSelectedItem();
         if(this.validarCamposProduto() && produto == null){
             this.gerIG.getGerDominio().createProduto(cat, nomeProduto.getText(), ingredientes.getText(), Double.parseDouble(preco.getValue().toString()));
+            JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
         }else{
             //editar produto
         }
@@ -234,6 +235,9 @@ public class DlgCadProduto extends javax.swing.JDialog {
     private void cadastrarCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCatProdActionPerformed
         if(this.validarCamposCat() && categoria == null){
             this.gerIG.getGerDominio().createCategoria(nomeCat.getText());
+            JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
+            this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
+            
         }else{
             //editar categoria
         }
@@ -246,10 +250,10 @@ public class DlgCadProduto extends javax.swing.JDialog {
             return false;
         }
         
-        if (ingredientes.getText().isEmpty()) {
+        /**if (ingredientes.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo de ingredientes vazio. Preencha o campo.");
             return false;
-        }
+        };*/
         
         if (nomeProduto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo de nome do produto vazio. Preencha o campo.");

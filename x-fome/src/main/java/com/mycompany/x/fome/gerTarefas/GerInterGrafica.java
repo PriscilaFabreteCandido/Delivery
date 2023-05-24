@@ -102,7 +102,7 @@ public class GerInterGrafica {
     }
     
     public void openJanelaGerenciarProdutos(){
-        dlgGerenciarProdutos = (DlgGerenciarProdutos) abrirJanela(gerenciarPedidos, dlgGerenciarProdutos, DlgGerenciarCatProd.class);
+        dlgGerenciarProdutos = (DlgGerenciarProdutos) abrirJanela(gerenciarPedidos, dlgGerenciarProdutos, DlgGerenciarProdutos.class);
     }
     
     public void openJanelaCadastrarProduto(){

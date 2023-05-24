@@ -14,6 +14,7 @@
             <Property name="text" type="java.lang.String" value="Cadastrar Produto"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuCadProdMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCadProdActionPerformed"/>
           </Events>
         </Menu>
@@ -22,6 +23,7 @@
             <Property name="text" type="java.lang.String" value="Gerenciar Produtos"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuGerProdMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGerProdActionPerformed"/>
           </Events>
         </Menu>
@@ -30,6 +32,7 @@
             <Property name="text" type="java.lang.String" value="Gerenciar Categoria de Produtos"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuGerCatProdMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGerCatProdActionPerformed"/>
           </Events>
         </Menu>

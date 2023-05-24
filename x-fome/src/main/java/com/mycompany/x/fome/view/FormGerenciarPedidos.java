@@ -116,6 +116,11 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jButton3.setText("Cancelar Pedido");
 
         menuCadProd.setText("Cadastrar Produto");
+        menuCadProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuCadProdMouseClicked(evt);
+            }
+        });
         menuCadProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadProdActionPerformed(evt);
@@ -124,6 +129,11 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jMenuBar1.add(menuCadProd);
 
         menuGerProd.setText("Gerenciar Produtos");
+        menuGerProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuGerProdMouseClicked(evt);
+            }
+        });
         menuGerProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuGerProdActionPerformed(evt);
@@ -132,6 +142,11 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jMenuBar1.add(menuGerProd);
 
         menuGerCatProd.setText("Gerenciar Categoria de Produtos");
+        menuGerCatProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuGerCatProdMouseClicked(evt);
+            }
+        });
         menuGerCatProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuGerCatProdActionPerformed(evt);
@@ -234,6 +249,18 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private void menuGerCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerCatProdActionPerformed
         this.gerG.openJanelaGerenciarCatProduto();
     }//GEN-LAST:event_menuGerCatProdActionPerformed
+
+    private void menuCadProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCadProdMouseClicked
+        this.gerG.openJanelaCadastrarProduto();
+    }//GEN-LAST:event_menuCadProdMouseClicked
+
+    private void menuGerProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuGerProdMouseClicked
+        this.gerG.openJanelaGerenciarProdutos();
+    }//GEN-LAST:event_menuGerProdMouseClicked
+
+    private void menuGerCatProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuGerCatProdMouseClicked
+        this.gerG.openJanelaGerenciarCatProduto();
+    }//GEN-LAST:event_menuGerCatProdMouseClicked
 
     /**
      * @param args the command line arguments
