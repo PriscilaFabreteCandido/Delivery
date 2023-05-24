@@ -25,6 +25,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGerProdActionPerformed"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="menuGerCatProd">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gerenciar Categoria de Produtos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGerCatProdActionPerformed"/>
+          </Events>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

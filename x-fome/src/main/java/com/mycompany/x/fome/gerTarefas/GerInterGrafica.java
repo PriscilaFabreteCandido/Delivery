@@ -11,6 +11,7 @@ import com.mycompany.x.fome.domain.Pedido;
 import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.domain.ProdutoPedido;
 import com.mycompany.x.fome.domain.Usuario;
+import com.mycompany.x.fome.view.DlgCadProduto;
 import com.mycompany.x.fome.view.DlgGerenciarCatProd;
 import com.mycompany.x.fome.view.DlgGerenciarProdutos;
 import com.mycompany.x.fome.view.DlgLogin;
@@ -53,6 +54,7 @@ public class GerInterGrafica {
     private FormGerenciarPedidos gerenciarPedidos = null;
     private DlgGerenciarProdutos dlgGerenciarProdutos = null;
     private DlgGerenciarCatProd dlgGerenciarCatProd = null;
+    private DlgCadProduto dlgCadProduto = null;
     GerenciadorDominio gerDominio;
     
     public GerInterGrafica() {
@@ -104,11 +106,14 @@ public class GerInterGrafica {
     }
     
     public void openJanelaCadastrarProduto(){
-        dlgGerenciarCatProd = (DlgGerenciarCatProd) abrirJanela(gerenciarPedidos, dlgGerenciarCatProd, DlgGerenciarCatProd.class);
+        dlgCadProduto = (DlgCadProduto) abrirJanela(gerenciarPedidos, dlgCadProduto, DlgCadProduto.class);
     }
     
     public void openJanelaVisualizarPedidos(){
-        dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(principalCliente, dlgVisualizarPedidos, DlgVisualizarPedidos.class);
+        dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(gerenciarPedidos, dlgVisualizarPedidos, DlgVisualizarPedidos.class);
+    }
+    public void openJanelaGerenciarCatProduto(){
+        dlgGerenciarCatProd = (DlgGerenciarCatProd) abrirJanela(gerenciarPedidos, dlgGerenciarCatProd, DlgGerenciarCatProd.class);
     }
    
     

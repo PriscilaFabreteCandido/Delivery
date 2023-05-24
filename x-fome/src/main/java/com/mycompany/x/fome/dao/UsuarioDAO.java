@@ -59,7 +59,7 @@ public class UsuarioDAO {
         return usuarioEncontrado;
     }
    
-   @Tr
+   
     public Usuario getById(Usuario user, boolean lazy) throws HibernateException {        
         Session sessao = null;
         Usuario usuarioEncontrado = null;

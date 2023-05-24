@@ -52,6 +52,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCadProd = new javax.swing.JMenu();
         menuGerProd = new javax.swing.JMenu();
+        menuGerCatProd = new javax.swing.JMenu();
 
         jLabel2.setText("jLabel2");
 
@@ -129,6 +130,14 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(menuGerProd);
+
+        menuGerCatProd.setText("Gerenciar Categoria de Produtos");
+        menuGerCatProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGerCatProdActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuGerCatProd);
 
         setJMenuBar(jMenuBar1);
 
@@ -222,6 +231,10 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
          this.gerG.openJanelaGerenciarProdutos();
     }//GEN-LAST:event_menuGerProdActionPerformed
 
+    private void menuGerCatProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerCatProdActionPerformed
+        this.gerG.openJanelaGerenciarCatProduto();
+    }//GEN-LAST:event_menuGerCatProdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,6 +261,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JMenu menuCadProd;
+    private javax.swing.JMenu menuGerCatProd;
     private javax.swing.JMenu menuGerProd;
     // End of variables declaration//GEN-END:variables
 }
