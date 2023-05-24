@@ -6,9 +6,14 @@
 package com.mycompany.x.fome.view;
 
 import com.mycompany.x.fome.domain.Categoria;
+import com.mycompany.x.fome.domain.Pedido;
 import com.mycompany.x.fome.domain.Produto;
+import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -264,6 +269,7 @@ public class DlgLoja extends javax.swing.JDialog {
             this.selectedProdutos.remove(tableProdutos.getSelectedRow());
             tableModel.removeRow(tableProdutos.getSelectedRow());
             tableProdutos.setModel(tableModel);
+            this.total.setText(getTotal().toString());
         }else{
             JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
         }
@@ -333,14 +339,26 @@ public class DlgLoja extends javax.swing.JDialog {
     
     public Double getTotal(){
         Double total = 0.0;
-        if(selectedProdutos != null){
-            for(Produto prod : selectedProdutos){
-                total += prod.getPreco();
-            } 
+
+        DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
+        if (tableModel.getDataVector() != null) {
+            for (Object obj : tableModel.getDataVector()) {
+                if (obj instanceof Vector) {
+                    Vector item = (Vector) obj;
+
+                    if (item.size() >= 2) {
+                            Produto produto = (Produto) item.get(0);
+                            Integer qtd = (Integer) item.get(1);
+                            total += produto.getPreco() * qtd;
+                        }
+                    }
+            }
         }
+        
         if(simNaoString.equals("Não")){
             total += 2;
         }
+ 
         return total;
     }
     /**

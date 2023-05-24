@@ -27,10 +27,11 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
      * Creates new form DlgGerenciarCatProd
      */
     private GerInterGrafica gerIG = null;
-    public DlgGerenciarCatProd(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG) {
+    public DlgGerenciarCatProd(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG) throws ParseException {
         super(parent, modal);
         initComponents();
         this.gerIG = gerIG;
+        this.loadTable(table);
     }
     
     public void loadTable(JTable tabela) throws ParseException{
