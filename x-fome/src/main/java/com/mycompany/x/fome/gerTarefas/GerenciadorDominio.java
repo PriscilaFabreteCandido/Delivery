@@ -56,11 +56,17 @@ public class GerenciadorDominio {
         return genDao.listar(classe);        
     }
     
-    public void insertUsuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, String cpf){
+    public Usuario insertUsuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, String cpf){
         Usuario insertUsuario = new Usuario(nomeUsuario, endereco, cep, isCliente, email, senha, cidade, cpf);
         genDao.inserir(insertUsuario);
+        return insertUsuario;
     }
     
+    public void editarUsuario(int idUsuario, String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, String cpf){
+        Usuario updateUser = new Usuario(nomeUsuario, endereco, cep, isCliente, email, senha, cidade, cpf);
+        updateUser.setIdUsuario(idUsuario);
+        genDao.alterar(updateUser);
+    }
     // GENÉRICOS
     public void excluir (Object obj) throws HibernateException {
         genDao.excluir(obj);
@@ -132,6 +138,10 @@ public class GerenciadorDominio {
        Categoria cat = new Categoria(nome);
        this.genDao.inserir(cat);
    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
    
    public void createProduto(Categoria cat, String nome, String ingredientes, Double preco){
        Produto prod = new Produto(cat, nome, ingredientes, preco);

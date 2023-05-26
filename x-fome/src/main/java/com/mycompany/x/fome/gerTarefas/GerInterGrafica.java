@@ -115,7 +115,6 @@ public class GerInterGrafica {
     public void openJanelaGerenciarCatProduto(){
         dlgGerenciarCatProd = (DlgGerenciarCatProd) abrirJanela(gerenciarPedidos, dlgGerenciarCatProd, DlgGerenciarCatProd.class);
     }
-   
     
     public void carregarComboCategoria(JComboBox combo, Class classe) {
 

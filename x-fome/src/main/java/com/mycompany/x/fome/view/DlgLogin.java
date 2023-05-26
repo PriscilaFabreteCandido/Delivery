@@ -21,6 +21,7 @@ public class DlgLogin extends javax.swing.JDialog {
      */
     
     private GerInterGrafica gerIG = null;
+    private Usuario usuario = null;
     public DlgLogin(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
         initComponents();
@@ -146,15 +147,16 @@ public class DlgLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_cadastrarActionPerformed
 
     private void realizarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarLoginActionPerformed
-        this.setVisible(false);
+        
         if(gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword())) != null){
+            this.setVisible(false);
             Usuario user = gerIG.getGerDominio().efetuarLogin(email.getText(), String.valueOf(senha.getPassword())) ;
+            
             if(user.isIsCliente()){
                 gerIG.openJanelaPrincipalCliente();   
             }else{
                 gerIG.openJanelaGerenciarPedidos();
             }
-            
         }else{
             JOptionPane.showMessageDialog(null, "Usuário ou senha inválida");
         }

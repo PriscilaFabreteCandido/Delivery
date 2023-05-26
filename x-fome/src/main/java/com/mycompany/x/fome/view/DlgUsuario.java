@@ -24,6 +24,7 @@ public class DlgUsuario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.gerIG = gerIG;
+        usuario = this.gerIG.getGerDominio().getUsuario();
         this.preencherCampos();
     }
     
@@ -226,11 +227,21 @@ public class DlgUsuario extends javax.swing.JDialog {
                 default:
                      break;
             }
-            
-            this.gerIG.getGerDominio().insertUsuario(nome.getText(), endereco.getText(), cep.getText(), true, email.getText(), String.valueOf(senha.getPassword()), cidade, cpf.getText());
+            usuario = this.gerIG.getGerDominio().insertUsuario(nome.getText(), endereco.getText(), cep.getText(), true, email.getText(), String.valueOf(senha.getPassword()), cidade, cpf.getText());
             JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
         }else{
-            
+            String cidade = "Colatina";
+            switch (cidadeCombobox.getSelectedIndex()) {
+                case 2:
+                    cidade = "Vitória";
+                    break;
+                case 3:
+                    cidade = "Cariacica";
+                    break;
+                default:
+                     break;
+            }
+            this.gerIG.getGerDominio().editarUsuario(usuario.getIdUsuario(), nome.getText(), endereco.getText(), cep.getText(), true, email.getText(), String.valueOf(senha.getPassword()), cidade, cpf.getText());
         }
         
         
@@ -240,6 +251,10 @@ public class DlgUsuario extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

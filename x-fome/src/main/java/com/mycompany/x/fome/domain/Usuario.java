@@ -146,5 +146,45 @@ public class Usuario implements Serializable {
     public Usuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public void setIsCliente(boolean isCliente) {
+        this.isCliente = isCliente;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
     
 }

@@ -44,7 +44,7 @@ public class DlgLoja extends javax.swing.JDialog {
     public void loadCombobox(){
         this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
         Categoria categoria = (Categoria) this.categoriaCombobox.getModel().getSelectedItem();
-        if(categoria != null){;
+        if(categoria != null){
             this.gerIG.carregarListaProdutosPorCategoria(tabelaProdutoByCat, categoria);
         }
        

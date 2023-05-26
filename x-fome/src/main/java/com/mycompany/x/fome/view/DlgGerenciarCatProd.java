@@ -12,6 +12,7 @@ import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
 import java.text.ParseException;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -64,8 +65,8 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        excluir = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -84,11 +85,16 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(table);
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 204));
-        jButton1.setText("Excluir");
+        excluir.setBackground(new java.awt.Color(255, 204, 204));
+        excluir.setText("Excluir");
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 204));
-        jButton2.setText("Editar");
+        editar.setBackground(new java.awt.Color(204, 255, 204));
+        editar.setText("Editar");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,9 +111,9 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(126, 126, 126)
-                .addComponent(jButton1)
+                .addComponent(excluir)
                 .addGap(30, 30, 30)
-                .addComponent(jButton2)
+                .addComponent(editar)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,13 +125,24 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(excluir)
+                    .addComponent(editar))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        if (table.getSelectedRow() >= 0){
+            
+            tableModel.removeRow(table.getSelectedRow());
+            table.setModel(tableModel);
+        }else{
+            JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+        }        
+    }//GEN-LAST:event_editarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,8 +150,8 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton editar;
+    private javax.swing.JButton excluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
