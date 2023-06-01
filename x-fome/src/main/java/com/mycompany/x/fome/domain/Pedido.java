@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,7 +60,7 @@ public class Pedido implements Serializable  {
         this.isRetirarNaLoja = isRetirarNaLoja;
     }
     
-    @OneToMany ( mappedBy = "pedido", fetch =  FetchType.LAZY)
+    @OneToMany ( mappedBy = "pedido", fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ProdutoPedido> produtos;
     
     @Column (name="taxaEntrega", nullable = false)
@@ -94,6 +95,7 @@ public class Pedido implements Serializable  {
         this.endereco = endereco;
         this.isRetirarNaLoja = isRetirarNaLoja;
         this.taxa_entrega = taxa_entrega;
+        this.produtos = new ArrayList<>();
     }
 
     public Pedido(int idPedido, Usuario cliente, Status status, Date data, String endereco, boolean isRetirarNaLoja, List<ProdutoPedido> produtos, double taxa_entrega) {

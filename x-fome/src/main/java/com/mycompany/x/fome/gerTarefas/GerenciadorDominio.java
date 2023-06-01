@@ -79,8 +79,6 @@ public class GerenciadorDominio {
     
     //Pedido
    public void efetuarPedido(Vector pedidos, boolean isRetirarNaLoja) {
-       System.out.println(usuario);
-       boolean salvouPedido = false;
        Pedido pedido = null;
        List<Produto> produtoList = new ArrayList<>();
         if (pedidos != null) {
@@ -95,19 +93,17 @@ public class GerenciadorDominio {
                             List<Status> statusList = genDao.listar(Status.class);
                             Status status = statusList.stream().filter(x -> x.getNome().equals("Pendente")).findFirst().get();
                             
-                            if(!salvouPedido){
+                            if(pedido == null){
                                 pedido = new Pedido(usuario, status, new Date(), usuario.getEndereco(), isRetirarNaLoja, 2.2);
-                                pedido = this.pedidoDAO.inserir(pedido);
-                                salvouPedido = true;
-                                this.genDao.inserir(this.createProdutoPedido(pedido, produto, qtd));
+                                pedido.getProdutos().add(this.createProdutoPedido(pedido, produto, qtd));
                             }else{
-                                this.genDao.inserir(this.createProdutoPedido(pedido, produto, qtd));
+                                pedido.getProdutos().add(this.createProdutoPedido(pedido, produto, qtd));
                             }
                         }
                     }
             }
         }
-        
+        pedido = this.pedidoDAO.inserir(pedido);
         JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!!");  
     }
    
