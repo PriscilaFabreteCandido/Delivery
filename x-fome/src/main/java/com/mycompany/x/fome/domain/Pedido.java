@@ -138,6 +138,11 @@ public class Pedido implements Serializable  {
         this.endereco = endereco;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(idPedido);
+    }
+
     public List<ProdutoPedido> getProdutos() {
         return produtos;
     }

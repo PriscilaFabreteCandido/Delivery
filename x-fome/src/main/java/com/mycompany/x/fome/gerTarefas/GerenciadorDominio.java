@@ -147,7 +147,10 @@ public class GerenciadorDominio {
    public List<Categoria> getAllCategoria(){
        return this.genDao.listar(Categoria.class);
    }
-   
+    public List<Pedido> filtrarPedidos(Status status, String endereco, String cliente, String codigo, boolean isMaisAntigo, boolean retirarLoja){
+        return pedidoDAO.filtrar(status, endereco, cliente , 
+                !codigo.isEmpty() ? Integer.parseInt(codigo) : 0, isMaisAntigo, retirarLoja);
+    }
     public List<Produto> getAllProdutos(){
        return this.genDao.listar(Produto.class);
    }

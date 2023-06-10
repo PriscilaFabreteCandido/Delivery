@@ -10,6 +10,7 @@ import com.mycompany.x.fome.domain.Categoria;
 import com.mycompany.x.fome.domain.Pedido;
 import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.domain.ProdutoPedido;
+import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.view.DlgCadProduto;
 import com.mycompany.x.fome.view.DlgGerenciarCatProd;
@@ -23,7 +24,10 @@ import com.mycompany.x.fome.view.FormPrincipalCliente;
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -193,6 +197,30 @@ public class GerInterGrafica {
         }
         
         tabela.setShowVerticalLines(false);
+    }
+    
+    
+    public String converterData(Date dataString) {
+        String dataFormatada = "";
+        try {
+            // Cria um objeto SimpleDateFormat para definir o formato desejado
+            DateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+
+            // Converte a data para uma string no formato de entrada
+            String dataStringFormatada = formatoEntrada.format(dataString);
+
+            // Converte a string formatada para um objeto Date
+            Date data = formatoEntrada.parse(dataStringFormatada);
+
+            // Formata a data no novo formato
+            dataFormatada = formatoSaida.format(data);
+
+            System.out.println("Data formatada: " + dataFormatada);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dataFormatada;
     }
     
     public static void main(String[] args) {
