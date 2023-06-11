@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,10 +30,13 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
      * Creates new form FrameGerenciarPedidos
      */
     private GerInterGrafica gerG = null;
+    private List<Pedido> selectedPedidos = null;
+    private List<Status> statusList = null;
     public FormGerenciarPedidos(GerInterGrafica gerG) {
         initComponents();
         this.gerG = gerG;
         this.gerG.carregarComboBox(statusCombobox, Status.class);
+        statusList = this.gerG .getGerDominio().listar(Status.class);
         this.maisRecente.setSelected(true);
         this.nao.setSelected(true);
         this.loadTable(table);
@@ -65,7 +69,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         cliente = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         codigo = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        editarPedido = new javax.swing.JButton();
         cancelarPedido = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         sim = new javax.swing.JRadioButton();
@@ -137,11 +141,21 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
 
         jLabel6.setText("Código");
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 204));
-        jButton2.setText("Editar Pedido");
+        editarPedido.setBackground(new java.awt.Color(204, 255, 204));
+        editarPedido.setText("Editar Pedido");
+        editarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarPedidoActionPerformed(evt);
+            }
+        });
 
         cancelarPedido.setBackground(new java.awt.Color(255, 204, 204));
         cancelarPedido.setText("Cancelar Pedido");
+        cancelarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarPedidoActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Retirar na Loja?"));
 
@@ -249,7 +263,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
                                 .addComponent(filtrar))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(359, 359, 359)
-                        .addComponent(jButton2)
+                        .addComponent(editarPedido)
                         .addGap(55, 55, 55)
                         .addComponent(cancelarPedido)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -298,7 +312,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
                         .addComponent(filtrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(editarPedido)
                     .addComponent(cancelarPedido))
                 .addGap(44, 44, 44))
         );
@@ -334,6 +348,35 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         this.loadTable(table);
     }//GEN-LAST:event_filtrarActionPerformed
 
+    private void editarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPedidoActionPerformed
+       if (table.getSelectedRow() >= 0) {
+            int selectedRowIndex = table.getSelectedRow();
+           
+            // Faça o que você precisa com o objeto Pedido selecionado
+             JOptionPane.showMessageDialog(null, "Favor selecionar uma linha " +  selectedRowIndex);
+            this.gerG.openJanelaPedido(selectedPedidos.get(selectedRowIndex));
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+        }
+    }//GEN-LAST:event_editarPedidoActionPerformed
+
+    private void cancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarPedidoActionPerformed
+        
+        if (table.getSelectedRow() >= 0) {
+            Status status = statusList.stream().filter(x -> x.getNome().equals("Pedido Cancelado")).findFirst().get();
+            int selectedRowIndex = table.getSelectedRow();
+           
+            Pedido pedido = selectedPedidos.get(selectedRowIndex);
+            pedido.setStatus(status);
+            this.gerG.getGerDominio().editarPedido(pedido);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+        }
+        
+    }//GEN-LAST:event_cancelarPedidoActionPerformed
+
     public void loadTable(JTable tabela) {
         DefaultTableModel tableModel = (DefaultTableModel) tabela.getModel();
         
@@ -344,9 +387,9 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         
         
         try {
-            List<Pedido> lista = this.gerG.getGerDominio().filtrarPedidos((Status) this.statusCombobox.getModel().getSelectedItem(), endereco.getText(), cliente.getText(), codigo.getText(), !this.maisRecente.isSelected(), this.sim.isSelected());
-            if(!lista.isEmpty()){
-                for(Pedido ped: lista){
+            selectedPedidos = this.gerG.getGerDominio().filtrarPedidos((Status) this.statusCombobox.getModel().getSelectedItem(), endereco.getText(), cliente.getText(), codigo.getText(), !this.maisRecente.isSelected(), this.sim.isSelected());
+            if(!selectedPedidos.isEmpty()){
+                for(Pedido ped: selectedPedidos){
                     Object[] rowData = {ped, ped.getStatus().getNome(), ped.getEndereco(), ped.getCliente().getNomeUsuario(),
                     this.gerG.converterData(ped.getData()), ped.getTaxa_entrega(),
                     ped.isIsRetirarNaLoja() ? "Não" : "Sim" };
@@ -370,9 +413,9 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     private javax.swing.JTextField cliente;
     private javax.swing.JTextField codigo;
     private javax.swing.ButtonGroup dataGroup;
+    private javax.swing.JButton editarPedido;
     private javax.swing.JTextField endereco;
     private javax.swing.JButton filtrar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

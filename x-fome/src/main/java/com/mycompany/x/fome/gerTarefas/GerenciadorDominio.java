@@ -37,6 +37,10 @@ public class GerenciadorDominio {
    UsuarioDAO usuarioDAO = null;
    Usuario usuario = null;
    PedidoDAO pedidoDAO = null;
+
+    public GenericDAO getGenDao() {
+        return genDao;
+    }
    
    public GerenciadorDominio() throws HibernateException {
         // TESTE
@@ -139,19 +143,33 @@ public class GerenciadorDominio {
         return usuario;
     }
    
-   public void createProduto(Categoria cat, String nome, String ingredientes, Double preco){
-       Produto prod = new Produto(cat, nome, ingredientes, preco);
-       this.genDao.inserir(prod);
-   }
+    public void createProduto(Categoria cat, String nome, String ingredientes, Double preco){
+        Produto prod = new Produto(cat, nome, ingredientes, preco);
+        this.genDao.inserir(prod);
+    }
    
-   public List<Categoria> getAllCategoria(){
-       return this.genDao.listar(Categoria.class);
-   }
+    public List<Categoria> getAllCategoria(){
+        return this.genDao.listar(Categoria.class);
+    }
+    
     public List<Pedido> filtrarPedidos(Status status, String endereco, String cliente, String codigo, boolean isMaisAntigo, boolean retirarLoja){
         return pedidoDAO.filtrar(status, endereco, cliente , 
                 !codigo.isEmpty() ? Integer.parseInt(codigo) : 0, isMaisAntigo, retirarLoja);
     }
+    
     public List<Produto> getAllProdutos(){
        return this.genDao.listar(Produto.class);
-   }
+    }
+    
+    public void editarPedido(Pedido pedido){
+        Pedido edit = new Pedido();
+        edit.setCliente(pedido.getCliente());
+        edit.setIdPedido(pedido.getIdPedido());
+        edit.setStatus(pedido.getStatus());
+        edit.setEndereco(pedido.getEndereco());
+        edit.setData(pedido.getData());
+        edit.setIsRetirarNaLoja(pedido.isIsRetirarNaLoja());
+
+        this.genDao.alterar(edit);
+    }
 }

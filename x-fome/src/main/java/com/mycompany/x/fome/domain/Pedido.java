@@ -159,4 +159,15 @@ public class Pedido implements Serializable  {
         this.taxa_entrega = taxa_entrega;
     }
     
+    public String getDescricaoPedido(){
+        StringBuilder produtos = new StringBuilder();
+        if(!this.getProdutos().isEmpty() && this.getProdutos().size() >= 1){
+            for(ProdutoPedido item: this.getProdutos()){
+            int qtd = item.getQtd();
+            produtos.append(qtd + " - " + item.getProduto().getNomeProduto() + "; " );
+        }
+        }
+        return produtos.toString();
+    }
+    
 }

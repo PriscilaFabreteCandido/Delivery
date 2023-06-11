@@ -17,6 +17,7 @@ import com.mycompany.x.fome.view.DlgGerenciarCatProd;
 import com.mycompany.x.fome.view.DlgGerenciarProdutos;
 import com.mycompany.x.fome.view.DlgLogin;
 import com.mycompany.x.fome.view.DlgLoja;
+import com.mycompany.x.fome.view.DlgPedido;
 import com.mycompany.x.fome.view.DlgUsuario;
 import com.mycompany.x.fome.view.DlgVisualizarPedidos;
 import com.mycompany.x.fome.view.FormGerenciarPedidos;
@@ -59,6 +60,7 @@ public class GerInterGrafica {
     private DlgGerenciarProdutos dlgGerenciarProdutos = null;
     private DlgGerenciarCatProd dlgGerenciarCatProd = null;
     private DlgCadProduto dlgCadProduto = null;
+    private DlgPedido dlgPedido = null;
     GerenciadorDominio gerDominio;
     
     public GerInterGrafica() {
@@ -118,6 +120,11 @@ public class GerInterGrafica {
     }
     public void openJanelaGerenciarCatProduto(){
         dlgGerenciarCatProd = (DlgGerenciarCatProd) abrirJanela(gerenciarPedidos, dlgGerenciarCatProd, DlgGerenciarCatProd.class);
+    }
+    
+    public void openJanelaPedido(Pedido pedido){
+        dlgPedido = (DlgPedido) abrirJanela(gerenciarPedidos, dlgPedido, DlgPedido.class);
+        dlgPedido.setPedido(pedido);
     }
     
     public void carregarComboCategoria(JComboBox combo, Class classe) {
@@ -200,12 +207,13 @@ public class GerInterGrafica {
     }
     
     
+    
     public String converterData(Date dataString) {
         String dataFormatada = "";
         try {
             // Cria um objeto SimpleDateFormat para definir o formato desejado
             DateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
-            DateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
             // Converte a data para uma string no formato de entrada
             String dataStringFormatada = formatoEntrada.format(dataString);

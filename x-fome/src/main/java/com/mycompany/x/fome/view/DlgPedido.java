@@ -5,6 +5,8 @@
  */
 package com.mycompany.x.fome.view;
 
+import com.mycompany.x.fome.domain.Pedido;
+import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
 
 /**
@@ -17,12 +19,30 @@ public class DlgPedido extends javax.swing.JDialog {
      * Creates new form DlgPedido
      */
     private GerInterGrafica gerIG = null;
+    private Pedido pedido = null;
     public DlgPedido(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG ) {
         super(parent, modal);
         initComponents();
         this.gerIG = gerIG;
+        this.gerIG.carregarComboBox(statusCombobox, Status.class);
+        this.prencherCampos();
     }
 
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+        this.prencherCampos();
+    }
+    
+    private void prencherCampos(){
+        if(this.pedido != null){
+            descricao.setText(this.pedido.getDescricaoPedido());
+            pedidoCodigo.setText(String.valueOf(this.pedido.getIdPedido()));
+            data.setText(this.gerIG.converterData(pedido.getData()));
+            taxa.setText("R$ " + String.valueOf(pedido.getTaxa_entrega()));
+            statusCombobox.setSelectedItem(this.pedido.getStatus());
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
