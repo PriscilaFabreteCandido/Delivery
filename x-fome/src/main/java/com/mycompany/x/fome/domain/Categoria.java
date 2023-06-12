@@ -69,4 +69,8 @@ public class Categoria implements Serializable {
     
     @OneToMany ( mappedBy = "categoria", fetch =  FetchType.LAZY)
     private List<Produto> produtos;
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
 }

@@ -118,7 +118,7 @@ public class GerInterGrafica {
     public void openJanelaVisualizarPedidos(){
         dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(gerenciarPedidos, dlgVisualizarPedidos, DlgVisualizarPedidos.class);
     }
-    public void openJanelaGerenciarCatProduto(){
+    public void openJanelaGerenciarCatProduto(Categoria categoria, Pedido pedido){
         dlgGerenciarCatProd = (DlgGerenciarCatProd) abrirJanela(gerenciarPedidos, dlgGerenciarCatProd, DlgGerenciarCatProd.class);
     }
     

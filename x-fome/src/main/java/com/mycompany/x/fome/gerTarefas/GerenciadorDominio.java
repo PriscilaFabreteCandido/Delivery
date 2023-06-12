@@ -5,6 +5,7 @@
  */
 package com.mycompany.x.fome.gerTarefas;
 
+import com.mycompany.x.fome.dao.CategoriaDAO;
 import com.mycompany.x.fome.dao.ConexaoHibernate;
 import com.mycompany.x.fome.dao.GenericDAO;
 import com.mycompany.x.fome.dao.PedidoDAO;
@@ -37,6 +38,7 @@ public class GerenciadorDominio {
    UsuarioDAO usuarioDAO = null;
    Usuario usuario = null;
    PedidoDAO pedidoDAO = null;
+   CategoriaDAO categoriaDAO = null;
 
     public GenericDAO getGenDao() {
         return genDao;
@@ -50,6 +52,7 @@ public class GerenciadorDominio {
             produtoDAO = new ProdutoDAO();
             usuarioDAO = new UsuarioDAO();
             pedidoDAO = new PedidoDAO();  
+            categoriaDAO = new CategoriaDAO();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Deu erro" + ex.getMessage() );          
         }
@@ -188,5 +191,18 @@ public class GerenciadorDominio {
     }
     
     public void excluirCategoria(Categoria categoria){
+        Categoria temp = categoriaDAO.findById(categoria.getIdCategoria());
+        if(!temp.getProdutos().isEmpty() && temp.getProdutos().size() >= 1){
+            JOptionPane.showMessageDialog(null, "Não é possível excluir categorias que estão associadas a algum produto");  
+        }else{ 
+            this.genDao.excluir(temp);
+            JOptionPane.showMessageDialog(null, "Categoria excluída com sucesso!!!");  
+        }
+        
+    }
+    
+    public void excluirProduto(Produto produto){
+        this.genDao.excluir(produto);
+        JOptionPane.showMessageDialog(null, "Produto excluído com sucesso!!!");  
     }
 }
