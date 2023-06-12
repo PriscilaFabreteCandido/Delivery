@@ -87,6 +87,11 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
 
         excluir.setBackground(new java.awt.Color(255, 204, 204));
         excluir.setText("Excluir");
+        excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluirActionPerformed(evt);
+            }
+        });
 
         editar.setBackground(new java.awt.Color(204, 255, 204));
         editar.setText("Editar");
@@ -134,15 +139,17 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        
         if (table.getSelectedRow() >= 0){
             
-            tableModel.removeRow(table.getSelectedRow());
-            table.setModel(tableModel);
         }else{
             JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
         }        
     }//GEN-LAST:event_editarActionPerformed
+
+    private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
+        
+    }//GEN-LAST:event_excluirActionPerformed
 
     /**
      * @param args the command line arguments

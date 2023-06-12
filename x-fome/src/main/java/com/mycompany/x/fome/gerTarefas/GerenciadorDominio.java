@@ -172,4 +172,21 @@ public class GerenciadorDominio {
 
         this.genDao.alterar(edit);
     }
+    
+    public void editarCat(Categoria categoria){
+        Categoria edit = new Categoria(categoria.getIdCategoria(), categoria.getNome());
+        this.genDao.alterar(edit);
+    }
+    
+    public void editarProduto(Produto produto){
+        Produto edit = new Produto();
+        edit.setCategoria(produto.getCategoria());
+        edit.setIdProduto(produto.getIdProduto());
+        edit.setNomeProduto(produto.getNomeProduto());
+        edit.setPreco(produto.getPreco());
+        this.genDao.alterar(edit);
+    }
+    
+    public void excluirCategoria(Categoria categoria){
+    }
 }

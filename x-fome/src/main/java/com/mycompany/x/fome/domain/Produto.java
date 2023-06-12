@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +26,7 @@ public class Produto implements Serializable {
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private int idProduto;
     
-    @ManyToOne
-    @JoinColumn (name = "idCategoria")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Categoria categoria;
     
     @Column (name="nomeProduto", length = 250, nullable = false)

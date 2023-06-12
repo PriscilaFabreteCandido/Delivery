@@ -111,6 +111,11 @@ public class DlgPedido extends javax.swing.JDialog {
         taxa.setText("2,00");
 
         editar.setText("Editar");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,6 +182,12 @@ public class DlgPedido extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+        Status status = (Status) this.statusCombobox.getSelectedItem();
+        this.pedido.setStatus(status);
+        this.gerIG.getGerDominio().editarPedido(pedido);
+    }//GEN-LAST:event_editarActionPerformed
 
     /**
      * @param args the command line arguments

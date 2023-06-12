@@ -35,6 +35,7 @@ public class DlgCadProduto extends javax.swing.JDialog {
     private void preencherCampos(){
         if(categoria != null){
             nomeCat.setText(categoria.getNome());
+            this.limparCamposProd();
         }
         if(produto != null){
             preco.setValue(produto.getPreco());
@@ -48,7 +49,7 @@ public class DlgCadProduto extends javax.swing.JDialog {
                 }
                 i++;
             }
-            
+            nomeCat.setText("");
         }
     }
     /**
@@ -229,7 +230,8 @@ public class DlgCadProduto extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
             this.limparCamposProd();
         }else{
-            //editar produto
+            this.gerIG.getGerDominio().editarProduto(produto);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
 
@@ -240,7 +242,8 @@ public class DlgCadProduto extends javax.swing.JDialog {
             this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
             this.nomeCat.setText("");
         }else{
-            //editar categoria
+            this.gerIG.getGerDominio().editarCat(categoria);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_cadastrarCatProdActionPerformed
 
