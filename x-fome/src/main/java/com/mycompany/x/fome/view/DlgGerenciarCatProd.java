@@ -12,6 +12,8 @@ import com.mycompany.x.fome.domain.Usuario;
 import com.mycompany.x.fome.gerTarefas.GerInterGrafica;
 import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -28,30 +30,31 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
      * Creates new form DlgGerenciarCatProd
      */
     private GerInterGrafica gerIG = null;
+    private List<Categoria> selectedCategorias = null;
     public DlgGerenciarCatProd(java.awt.Frame parent, boolean modal, GerInterGrafica gerIG) throws ParseException {
         super(parent, modal);
         initComponents();
         this.gerIG = gerIG;
-        this.loadTable(table);
+        this.loadTable();
     }
     
-    public void loadTable(JTable tabela) throws ParseException{
-        DefaultTableModel tableModel = (DefaultTableModel) tabela.getModel();
+    public void loadTable() throws ParseException{
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        tabela.setDefaultRenderer(Object.class, centerRenderer);
+        table.setDefaultRenderer(Object.class, centerRenderer);
         tableModel.setRowCount(0);
         
-        List<Categoria> lista = this.gerIG.getGerDominio().getAllCategoria();
+        selectedCategorias = this.gerIG.getGerDominio().getAllCategoria();
         
-        if(!lista.isEmpty()){
-            for(Categoria cat: lista){
+        if(!selectedCategorias.isEmpty()){
+            for(Categoria cat: selectedCategorias){
                 tableModel.addRow(cat.toArray());
             }
         }
         
-        tabela.setShowVerticalLines(false);
+        table.setShowVerticalLines(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,14 +144,29 @@ public class DlgGerenciarCatProd extends javax.swing.JDialog {
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
         
         if (table.getSelectedRow() >= 0){
+            int i = table.getSelectedRow();
             
+            this.gerIG.openJanelaCadastrarProduto(selectedCategorias.get(i), null);
+            this.gerIG.atualizarTelas();
+             this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
         }        
     }//GEN-LAST:event_editarActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
-        
+        if (table.getSelectedRow() >= 0){
+            int i = table.getSelectedRow();
+            this.gerIG.getGerDominio().excluirCategoria(selectedCategorias.get(i));
+            this.gerIG.atualizarTelas();
+            try {
+                this.loadTable();
+            } catch (ParseException ex) {
+                Logger.getLogger(DlgGerenciarCatProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+        }     
     }//GEN-LAST:event_excluirActionPerformed
 
     /**

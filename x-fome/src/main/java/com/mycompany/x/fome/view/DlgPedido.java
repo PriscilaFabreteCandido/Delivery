@@ -186,7 +186,9 @@ public class DlgPedido extends javax.swing.JDialog {
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
         Status status = (Status) this.statusCombobox.getSelectedItem();
         this.pedido.setStatus(status);
+        this.setVisible(false);
         this.gerIG.getGerDominio().editarPedido(pedido);
+        this.gerIG.atualizarTelas();
     }//GEN-LAST:event_editarActionPerformed
 
     /**

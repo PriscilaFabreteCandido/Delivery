@@ -30,26 +30,26 @@ public class DlgCadProduto extends javax.swing.JDialog {
         initComponents();
         this.gerIG = gerIG;
         this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
+        
     }
     
-    private void preencherCampos(){
+    public void preencherCampos(){
         if(categoria != null){
             nomeCat.setText(categoria.getNome());
             this.limparCamposProd();
+        }else{
+            nomeCat.setText("");
         }
         if(produto != null){
             preco.setValue(produto.getPreco());
             ingredientes.setText(produto.getIngredientes());
             nomeProduto.setText(produto.getNomeProduto());
-            int i = 0;
-            for(Object obj: categoriaCombobox.getItemListeners()){
-                Categoria cat = (Categoria) obj;
-                if(produto.getCategoria().getNome().equals(cat.getNome())){
-                    categoriaCombobox.setSelectedIndex(i);
-                }
-                i++;
-            }
+            // Primeiro, encontre o índice da categoria desejada na combobox
+            this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
+            categoriaCombobox.setSelectedItem(produto.getCategoria());
             nomeCat.setText("");
+        }else{
+            this.limparCamposProd();
         }
     }
     /**
@@ -229,8 +229,10 @@ public class DlgCadProduto extends javax.swing.JDialog {
             this.gerIG.getGerDominio().createProduto(cat, nomeProduto.getText(), ingredientes.getText(), Double.parseDouble(preco.getValue().toString()));
             JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
             this.limparCamposProd();
+            this.gerIG.atualizarTelas();
         }else{
-            this.gerIG.getGerDominio().editarProduto(produto);
+            this.gerIG.getGerDominio().editarProduto(produto,cat, nomeProduto.getText(), ingredientes.getText(), Double.parseDouble(preco.getValue().toString()));
+            this.gerIG.atualizarTelas();
             this.setVisible(false);
         }
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
@@ -241,11 +243,20 @@ public class DlgCadProduto extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Registro inserido com sucesso!!! ");
             this.gerIG.carregarComboCategoria(categoriaCombobox, Categoria.class);
             this.nomeCat.setText("");
+            this.gerIG.atualizarTelas();
         }else{
-            this.gerIG.getGerDominio().editarCat(categoria);
+            this.gerIG.getGerDominio().editarCat(categoria,nomeCat.getText() );
             this.setVisible(false);
         }
     }//GEN-LAST:event_cadastrarCatProdActionPerformed
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
     private boolean validarCamposProduto(){
         Double valor = Double.parseDouble(preco.getValue().toString());

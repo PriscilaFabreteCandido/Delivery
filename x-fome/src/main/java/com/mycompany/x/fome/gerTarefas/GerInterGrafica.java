@@ -26,10 +26,13 @@ import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -68,10 +71,10 @@ public class GerInterGrafica {
         ConexaoHibernate.getSessionFactory();
     }
     
-    private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe) {
+    private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe, boolean visible) {
         if (dlg == null){     
             try {
-                dlg = (JDialog) classe.getConstructor(Frame.class, boolean.class, GerInterGrafica.class ).newInstance(parent,true, this);
+                dlg = (JDialog) classe.getConstructor(Frame.class, boolean.class, GerInterGrafica.class ).newInstance(parent,visible, this);
             } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 JOptionPane.showMessageDialog(parent, "Erro ao abrir a janela " + classe.getName() );
             } 
@@ -95,36 +98,62 @@ public class GerInterGrafica {
     }
     
     public void openJanelaUsuario(){
-        dlgUsuario = (DlgUsuario) abrirJanela(null, dlgUsuario, DlgUsuario.class);
+        dlgUsuario = (DlgUsuario) abrirJanela(null, dlgUsuario, DlgUsuario.class, true);
     }
     
     public void openJanelaLogin(){
-        dlgLogin = (DlgLogin) abrirJanela(null, dlgLogin, DlgLogin.class);
+        dlgLogin = (DlgLogin) abrirJanela(null, dlgLogin, DlgLogin.class, true);
         
     }
     
     public void openJanelaLoja(){
-        dlgLoja = (DlgLoja) abrirJanela(principalCliente, dlgLoja, DlgLoja.class);
+        dlgLoja = (DlgLoja) abrirJanela(principalCliente, dlgLoja, DlgLoja.class, true);
     }
     
     public void openJanelaGerenciarProdutos(){
-        dlgGerenciarProdutos = (DlgGerenciarProdutos) abrirJanela(gerenciarPedidos, dlgGerenciarProdutos, DlgGerenciarProdutos.class);
+        dlgGerenciarProdutos = (DlgGerenciarProdutos) abrirJanela(gerenciarPedidos, dlgGerenciarProdutos, DlgGerenciarProdutos.class, true);
     }
     
-    public void openJanelaCadastrarProduto(){
-        dlgCadProduto = (DlgCadProduto) abrirJanela(gerenciarPedidos, dlgCadProduto, DlgCadProduto.class);
+    public void openJanelaCadastrarProduto(Categoria categoria, Produto produto){
+        
+        dlgCadProduto = (DlgCadProduto) abrirJanela(gerenciarPedidos, dlgCadProduto, DlgCadProduto.class, false);
+        dlgCadProduto.setCategoria(categoria);
+        dlgCadProduto.setProduto(produto);
+        dlgCadProduto.preencherCampos();
+        dlgCadProduto.setVisible(true);
+
     }
     
     public void openJanelaVisualizarPedidos(){
-        dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(gerenciarPedidos, dlgVisualizarPedidos, DlgVisualizarPedidos.class);
+        dlgVisualizarPedidos = (DlgVisualizarPedidos) abrirJanela(gerenciarPedidos, dlgVisualizarPedidos, DlgVisualizarPedidos.class, true);
     }
-    public void openJanelaGerenciarCatProduto(Categoria categoria, Pedido pedido){
-        dlgGerenciarCatProd = (DlgGerenciarCatProd) abrirJanela(gerenciarPedidos, dlgGerenciarCatProd, DlgGerenciarCatProd.class);
+    public void openJanelaGerenciarCatProduto(){
+        dlgGerenciarCatProd = (DlgGerenciarCatProd) abrirJanela(gerenciarPedidos, dlgGerenciarCatProd, DlgGerenciarCatProd.class, true);
     }
     
+    public void atualizarTelas(){
+        if(dlgGerenciarCatProd != null){
+            try {
+                dlgGerenciarCatProd.loadTable();
+            } catch (ParseException ex) {
+                Logger.getLogger(GerInterGrafica.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(dlgGerenciarProdutos != null){
+            try {
+                dlgGerenciarProdutos.loadTable();
+            } catch (ParseException ex) {
+                Logger.getLogger(GerInterGrafica.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(gerenciarPedidos != null){
+            gerenciarPedidos.loadTable();
+        }
+    }
     public void openJanelaPedido(Pedido pedido){
-        dlgPedido = (DlgPedido) abrirJanela(gerenciarPedidos, dlgPedido, DlgPedido.class);
+        dlgPedido = (DlgPedido) abrirJanela(gerenciarPedidos, dlgPedido, DlgPedido.class, false);
         dlgPedido.setPedido(pedido);
+        dlgPedido.setVisible(true);
     }
     
     public void carregarComboCategoria(JComboBox combo, Class classe) {

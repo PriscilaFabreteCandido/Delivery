@@ -39,7 +39,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         statusList = this.gerG .getGerDominio().listar(Status.class);
         this.maisRecente.setSelected(true);
         this.nao.setSelected(true);
-        this.loadTable(table);
+        this.loadTable();
     }
 
     /**
@@ -321,7 +321,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadProdActionPerformed
-        this.gerG.openJanelaCadastrarProduto();
+        this.gerG.openJanelaCadastrarProduto(null, null);
     }//GEN-LAST:event_menuCadProdActionPerformed
 
     private void menuGerProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerProdActionPerformed
@@ -333,7 +333,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGerCatProdActionPerformed
 
     private void menuCadProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCadProdMouseClicked
-        this.gerG.openJanelaCadastrarProduto();
+        this.gerG.openJanelaCadastrarProduto(null, null);
     }//GEN-LAST:event_menuCadProdMouseClicked
 
     private void menuGerProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuGerProdMouseClicked
@@ -345,7 +345,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGerCatProdMouseClicked
 
     private void filtrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarActionPerformed
-        this.loadTable(table);
+        this.loadTable();
     }//GEN-LAST:event_filtrarActionPerformed
 
     private void editarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPedidoActionPerformed
@@ -353,7 +353,6 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
             int selectedRowIndex = table.getSelectedRow();
            
             // Faça o que você precisa com o objeto Pedido selecionado
-             JOptionPane.showMessageDialog(null, "Favor selecionar uma linha " +  selectedRowIndex);
             this.gerG.openJanelaPedido(selectedPedidos.get(selectedRowIndex));
             
         } else {
@@ -377,12 +376,12 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cancelarPedidoActionPerformed
 
-    public void loadTable(JTable tabela) {
-        DefaultTableModel tableModel = (DefaultTableModel) tabela.getModel();
+    public void loadTable() {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        tabela.setDefaultRenderer(Object.class, centerRenderer);
+        table.setDefaultRenderer(Object.class, centerRenderer);
         tableModel.setRowCount(0);
         
         
@@ -401,7 +400,7 @@ public class FormGerenciarPedidos extends javax.swing.JFrame {
         }
         
         
-        tabela.setShowVerticalLines(false);
+        table.setShowVerticalLines(false);
     }
     /**
      * @param args the command line arguments
