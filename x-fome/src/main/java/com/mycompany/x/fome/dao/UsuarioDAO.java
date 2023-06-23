@@ -44,7 +44,14 @@ public class UsuarioDAO {
             consulta.select(root).where(condicao);
 
             usuarioEncontrado = sessao.createQuery(consulta).uniqueResult();
-
+            
+            for(Pedido pedido: usuarioEncontrado.getPedidos()){
+                    pedido.getStatus();
+                    for(ProdutoPedido item: pedido.getProdutos()){
+                        item.getProduto();
+                    }
+            }
+            
             sessao.getTransaction().commit();
         } catch (HibernateException erro) {
             if (sessao != null) {

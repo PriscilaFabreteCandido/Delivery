@@ -5,6 +5,9 @@
  */
 package com.mycompany.x.fome.domain;
 
+import com.mycompany.x.fome.domain.strategy.DescontoMeta200;
+import com.mycompany.x.fome.domain.strategy.DescontoPrimeiraCompra;
+import com.mycompany.x.fome.domain.strategy.DescontoStrategy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,9 +36,6 @@ public class Usuario implements Serializable {
     @Column (name="nomeUsuario", length = 250, nullable = false)
     private String nomeUsuario;
 
-    public Usuario() {
-    }
-    
     @Column (name="endereco", length = 250, nullable = false)
     private String endereco;
     
@@ -58,7 +59,20 @@ public class Usuario implements Serializable {
     
     @Column (name="cpf", length = 250, nullable = false)
     private String cpf;
+    
+    private transient DescontoStrategy descontoStrategy;
 
+    public DescontoStrategy getDescontoStrategy() {
+        return descontoStrategy;
+    }
+
+    public void setDescontoStrategy(DescontoStrategy descontoStrategy) {
+        this.descontoStrategy = descontoStrategy;
+    }
+
+    public Usuario() {  
+    }
+    
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -106,6 +120,7 @@ public class Usuario implements Serializable {
         this.cidade = cidade;
         this.pedidos = pedidos;
         this.cpf = cpf;
+        
     }
 
     public Usuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, List<Pedido> pedidos, String cpf) {
@@ -119,7 +134,6 @@ public class Usuario implements Serializable {
         this.pedidos = pedidos;
         this.cpf = cpf;
         this.pedidos = new ArrayList<>();
-        
     }
 
     public Usuario(String nomeUsuario, String endereco, String cep, boolean isCliente, String email, String senha, String cidade, String cpf) {
@@ -134,11 +148,7 @@ public class Usuario implements Serializable {
         this.pedidos = new ArrayList<Pedido>();
     }
 
-    public Usuario(String nomeUsuario, String endereco) {
-        this.nomeUsuario = nomeUsuario;
-        this.endereco = endereco;
-    }
-
+   
     public List<Pedido> getPedidos() {
         return pedidos;
     }
@@ -187,4 +197,18 @@ public class Usuario implements Serializable {
         this.cpf = cpf;
     }
     
+    public Double getTotalPedidos(){
+        if(!pedidos.isEmpty() && pedidos.size() > 0){
+            double total = 0.0;
+     
+            for(Pedido pedido: pedidos){
+                for(ProdutoPedido produto: pedido.getProdutos()){
+                     total += produto.getPreco() * produto.getQtd() ;
+                }
+            }
+            
+            return total;
+        }
+        return 0.0;
+    }
 }

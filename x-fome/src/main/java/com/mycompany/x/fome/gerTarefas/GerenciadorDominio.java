@@ -17,6 +17,8 @@ import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.domain.ProdutoPedido;
 import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.domain.Usuario;
+import com.mycompany.x.fome.domain.strategy.DescontoMeta200;
+import com.mycompany.x.fome.domain.strategy.DescontoPrimeiraCompra;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,9 +129,22 @@ public class GerenciadorDominio {
        this.usuario = usuarioDAO.findByEmailAndSenha(email, senha);
        
        if(usuario != null){
-           return this.usuario;
+            this.setUsuarioDescontoStrategy();
+            return this.usuario;
        }
+       
        return null;
+   }
+   
+   public void setUsuarioDescontoStrategy(){
+        //se for a primeira compra
+        if(!this.usuario.getPedidos().isEmpty() || this.usuario.getPedidos().size() == 0){ 
+            this.usuario.setDescontoStrategy( new DescontoPrimeiraCompra());
+        }
+        //se o usuário comprou mais do que 200 reais 
+        else if(!this.usuario.getPedidos().isEmpty() && this.usuario.getTotalPedidos() >= 200.0){    
+            this.usuario.setDescontoStrategy( new DescontoMeta200());
+        } 
    }
    
    public Usuario getAllPedidosByUser(){
