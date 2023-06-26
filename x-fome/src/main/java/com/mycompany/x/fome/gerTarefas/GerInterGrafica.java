@@ -71,6 +71,7 @@ public class GerInterGrafica {
         ConexaoHibernate.getSessionFactory();
     }
     
+    //singleton 
     private JDialog abrirJanela(java.awt.Frame parent, JDialog dlg, Class classe, boolean visible) {
         if (dlg == null){     
             try {
