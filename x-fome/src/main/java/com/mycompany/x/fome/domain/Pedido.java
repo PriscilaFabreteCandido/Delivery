@@ -35,8 +35,19 @@ public class Pedido implements Serializable  {
     @ManyToOne
     @JoinColumn (name = "idUsuario")
     private Usuario cliente;
-
+    
+    @Column (name="total",  nullable = true)
+    private Double total;
+    
     public Pedido() {
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
     
     @ManyToOne

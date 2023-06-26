@@ -9,17 +9,17 @@ package com.mycompany.x.fome.domain.strategy;
  *
  * @author 2021122760232
  */
-public class DescontoPrimeiraCompra implements DescontoStrategy{
+public class DescontoDefault implements DescontoStrategy{
     
-    double desconto = 0.2;
+    double desconto = 0.0;
     @Override
     public Double calcularDesconto(Double total) {
-        return (total * ( 1 - desconto));
+        return total;
     }
 
     @Override
     public String getDesconto() {
-        return "20%";
+        return "0%";
     }
     
 }

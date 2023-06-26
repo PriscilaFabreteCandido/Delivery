@@ -75,7 +75,6 @@ public class DlgLoja extends javax.swing.JDialog {
         tableProdutos = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         desconto = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -150,9 +149,8 @@ public class DlgLoja extends javax.swing.JDialog {
         jLabel6.setText("Desconto:");
 
         desconto.setBackground(new java.awt.Color(204, 0, 0));
+        desconto.setForeground(new java.awt.Color(153, 0, 0));
         desconto.setText("20%");
-
-        jLabel7.setText("jLabel7");
 
         jLabel4.setText("Taxa de Entrega: R$ 2,00");
 
@@ -186,6 +184,7 @@ public class DlgLoja extends javax.swing.JDialog {
 
         jLabel9.setText("Total da Compra: ");
 
+        totalCompra.setForeground(new java.awt.Color(102, 102, 102));
         totalCompra.setText("R$ 100,00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,9 +229,6 @@ public class DlgLoja extends javax.swing.JDialog {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(total))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel7)
-                                            .addGap(0, 0, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel9)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(totalCompra)))))
@@ -259,21 +255,18 @@ public class DlgLoja extends javax.swing.JDialog {
                     .addComponent(adicionar)
                     .addComponent(excluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(desconto))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(SimNaoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(totalCompra)))
-                    .addComponent(jLabel7))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(desconto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(SimNaoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(totalCompra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -314,7 +307,7 @@ public class DlgLoja extends javax.swing.JDialog {
             this.selectedProdutos.remove(tableProdutos.getSelectedRow());
             tableModel.removeRow(tableProdutos.getSelectedRow());
             tableProdutos.setModel(tableModel);
-            this.desconto.setText(getTotal().toString());
+            this.total.setText(getTotal().toString());
         }else{
             JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
         }
@@ -325,15 +318,17 @@ public class DlgLoja extends javax.swing.JDialog {
         DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         tableModel.setRowCount(0);
-        this.desconto.setText("R$ 0,00");
+        this.totalCompra.setText("0");
+        this.desconto.setText("0");
+        total.setText("0");
     }
     
     private void realizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarPedidoActionPerformed
         DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
         if(this.SimNaoCombo.getSelectedItem().toString().equals("Não")){
-           this.gerIG.getGerDominio().efetuarPedido(tableModel.getDataVector(), false); 
+           this.gerIG.getGerDominio().efetuarPedido(tableModel.getDataVector(), false, this.getTotal()); 
         }else{
-           this.gerIG.getGerDominio().efetuarPedido(tableModel.getDataVector(), true); 
+           this.gerIG.getGerDominio().efetuarPedido(tableModel.getDataVector(), true, this.getTotal()); 
         }
         
         this.limparTudo();
@@ -346,12 +341,12 @@ public class DlgLoja extends javax.swing.JDialog {
     private void SimNaoComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimNaoComboActionPerformed
         if(this.SimNaoCombo.getSelectedItem().toString().equals("Sim")){
            simNaoString = "Sim";
-           this.desconto.setText(getTotal().toString());
+           this.total.setText(getTotal().toString());
+        }else{
+            simNaoString = "Não";
+           this.total.setText(getTotal().toString());
         }
-        else if(simNaoString.equals("Não")){
-           simNaoString = "Não";
-           this.desconto.setText(getTotal().toString());
-        }
+       
     }//GEN-LAST:event_SimNaoComboActionPerformed
     
     public void loadTableLoja(JTable tabela) {
@@ -375,13 +370,14 @@ public class DlgLoja extends javax.swing.JDialog {
             this.selectedProdutos.add(p);
             tableModel.addRow(rowData);
             
-            this.desconto.setText(getTotal().toString());
+            this.total.setText(getTotal().toString());
         }
         
         tabela.setShowVerticalLines(false);
     }
     
     public Double getTotal(){
+        this.gerIG.getGerDominio().setUsuarioDescontoStrategy();
         Double total = 0.0;
 
         DefaultTableModel tableModel = (DefaultTableModel) tableProdutos.getModel();
@@ -405,7 +401,8 @@ public class DlgLoja extends javax.swing.JDialog {
         
         this.totalCompra.setText(total.toString());
         this.desconto.setText(this.gerIG.getGerDominio().getUsuario().getDescontoStrategy().getDesconto());
-        return this.gerIG.getGerDominio().getUsuario().getDescontoStrategy().calcularDesconto(total);
+        
+        return Math.floor(this.gerIG.getGerDominio().getUsuario().getDescontoStrategy().calcularDesconto(total) * 100) / 100.0;
     }
     /**
      * @param args the command line arguments
@@ -424,7 +421,6 @@ public class DlgLoja extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;

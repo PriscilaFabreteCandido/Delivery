@@ -10,6 +10,6 @@ package com.mycompany.x.fome.domain.strategy;
  * @author 2021122760232
  */
 public interface DescontoStrategy {
-    double calcularDesconto(Double total);
+    Double calcularDesconto(Double total);
     String getDesconto();
 }

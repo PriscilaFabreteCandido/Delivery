@@ -17,6 +17,7 @@ import com.mycompany.x.fome.domain.Produto;
 import com.mycompany.x.fome.domain.ProdutoPedido;
 import com.mycompany.x.fome.domain.Status;
 import com.mycompany.x.fome.domain.Usuario;
+import com.mycompany.x.fome.domain.strategy.DescontoDefault;
 import com.mycompany.x.fome.domain.strategy.DescontoMeta200;
 import com.mycompany.x.fome.domain.strategy.DescontoPrimeiraCompra;
 import java.sql.SQLException;
@@ -87,7 +88,7 @@ public class GerenciadorDominio {
     }
     
     //Pedido
-   public void efetuarPedido(Vector pedidos, boolean isRetirarNaLoja) {
+   public void efetuarPedido(Vector pedidos, boolean isRetirarNaLoja, Double total) {
        Pedido pedido = null;
        List<Produto> produtoList = new ArrayList<>();
         if (pedidos != null) {
@@ -104,6 +105,7 @@ public class GerenciadorDominio {
                             
                             if(pedido == null){
                                 pedido = new Pedido(usuario, status, new Date(), usuario.getEndereco(), isRetirarNaLoja, 2.2);
+                                pedido.setTotal(total);
                                 pedido.getProdutos().add(this.createProdutoPedido(pedido, produto, qtd));
                             }else{
                                 pedido.getProdutos().add(this.createProdutoPedido(pedido, produto, qtd));
@@ -138,17 +140,21 @@ public class GerenciadorDominio {
    
    public void setUsuarioDescontoStrategy(){
         //se for a primeira compra
-        if(!this.usuario.getPedidos().isEmpty() || this.usuario.getPedidos().size() == 0){ 
+        if(this.usuario.getPedidos().size() == 0){ 
             this.usuario.setDescontoStrategy( new DescontoPrimeiraCompra());
         }
         //se o usuário comprou mais do que 200 reais 
         else if(!this.usuario.getPedidos().isEmpty() && this.usuario.getTotalPedidos() >= 200.0){    
             this.usuario.setDescontoStrategy( new DescontoMeta200());
         } 
+        else{
+            this.usuario.setDescontoStrategy( new DescontoDefault());
+        }
    }
    
    public Usuario getAllPedidosByUser(){
        this.usuario = usuarioDAO.getById(usuario, true);
+       this.setUsuarioDescontoStrategy();
        return usuario;
    }
    

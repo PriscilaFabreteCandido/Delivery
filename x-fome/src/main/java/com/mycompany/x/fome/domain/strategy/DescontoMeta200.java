@@ -13,7 +13,7 @@ public class DescontoMeta200 implements DescontoStrategy{
     double desconto = 0.25;
     
     @Override
-    public double calcularDesconto(Double total) {
+    public Double calcularDesconto(Double total) {
         return (total * ( 1 - desconto));
     }
     

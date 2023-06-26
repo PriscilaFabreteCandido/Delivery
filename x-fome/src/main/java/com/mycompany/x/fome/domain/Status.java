@@ -28,6 +28,8 @@ public class Status implements Serializable{
     
     @Column (name="nome", length = 250, nullable = false)
     private String nome;
+    
+    
 
     public int getIdStatus() {
         return idStatus;

@@ -226,7 +226,7 @@ public class GerInterGrafica {
                     produtos.append(qtd + " - " + item.getProduto().getNomeProduto() + "; " );
                 }
                 
-                Object[] rowData = {produtos.toString(), status, total};
+                Object[] rowData = {produtos.toString(), status, pedido.getTotal()};
                 
                 tableModel.addRow(rowData);
             }   
